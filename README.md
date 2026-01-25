@@ -1,6 +1,6 @@
-🩺 Cliniq
+🩺 ClinIq
 
-Cliniq is a smart healthcare application designed to bridge the gap between patients, AI-powered medical assistance, and professional doctors — all in one place.
+ClinIq is a smart healthcare application designed to bridge the gap between patients, AI-powered medical assistance, and professional doctors — all in one place.
 
 The app empowers users to better understand their health conditions, interpret medical reports, and easily reach doctors from various specialties for consultations or appointments.
 
@@ -36,7 +36,7 @@ Clean Arcititure
 
 🎯 Project Goal
 
-The goal of Cliniq is to make healthcare more accessible by combining AI assistance with real medical professionals, helping users make informed decisions about their health quickly and easily.
+The goal of ClinIq is to make healthcare more accessible by combining AI assistance with real medical professionals, helping users make informed decisions about their health quickly and easily.
 
 🚀 Future Enhancements
 
