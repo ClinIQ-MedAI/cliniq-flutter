@@ -18,9 +18,4 @@ const List<OnboardingEntity> onboardingList = [
     title: LocaleKeys.onboardingTitle3,
     description: LocaleKeys.onboardingDescription3,
   ),
-  OnboardingEntity(
-    image: AppImages.onboarding4,
-    title: LocaleKeys.onboardingTitle4,
-    description: LocaleKeys.onboardingDescription4,
-  ),
 ];

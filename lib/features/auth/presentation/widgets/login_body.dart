@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cliniq/core/constants/locale_keys.dart';
 import 'package:cliniq/core/helpers/get_text_palette.dart';
-import 'package:cliniq/core/utils/app_images.dart';
 import 'package:cliniq/core/utils/app_routes.dart';
 import 'package:cliniq/core/utils/app_text_styles.dart';
 import 'package:cliniq/core/widgets/custom_button.dart';
@@ -12,7 +11,6 @@ import 'package:cliniq/core/widgets/custom_text_form_field.dart';
 import 'package:cliniq/core/widgets/custom_password_text_field.dart';
 import 'package:cliniq/core/widgets/vertical_gap.dart';
 import 'package:cliniq/features/auth/presentation/providers/login_provider.dart';
-import 'package:cliniq/features/auth/presentation/widgets/auth_social_button.dart';
 
 class LoginBody extends ConsumerStatefulWidget {
   const LoginBody({super.key});
@@ -136,12 +134,6 @@ class _LoginBodyState extends ConsumerState<LoginBody> {
                   textColor: textPalette.contentBackgroundColor,
                   onPressed: submitLoginForm,
                   isDisabled: !isButtonEnabled,
-                ),
-                const VerticalGap(16),
-                AuthSocialButton(
-                  description: LocaleKeys.authLoginLoginWithGoogle.tr(),
-                  image: AppImages.googleLogo,
-                  onPressed: onGoogleLoginTap,
                 ),
                 const VerticalGap(16),
                 GestureDetector(

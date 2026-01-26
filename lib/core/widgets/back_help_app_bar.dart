@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cliniq/core/constants/locale_keys.dart';
-import 'package:cliniq/core/utils/app_images.dart';
 import 'package:cliniq/core/utils/app_text_styles.dart';
 import 'package:cliniq/core/utils/text_palette.dart';
 
@@ -43,7 +42,6 @@ class BackHelpAppBar extends StatelessWidget implements PreferredSizeWidget {
                   color: textPalette.tertiaryColor,
                 ),
               ),
-              Image.asset(AppImages.questionMarkIcon),
             ],
           ),
         ),

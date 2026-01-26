@@ -1,12 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:cliniq/core/constants/locale_keys.dart';
 import 'package:cliniq/core/helpers/get_text_palette.dart';
 import 'package:cliniq/core/utils/app_images.dart';
 import 'package:cliniq/core/utils/app_routes.dart';
-import 'package:cliniq/core/utils/app_svgs.dart';
 import 'package:cliniq/core/utils/app_text_styles.dart';
 import 'package:cliniq/core/widgets/custom_button.dart';
 import 'package:cliniq/core/widgets/vertical_gap.dart';
@@ -21,8 +19,7 @@ class InitialAuthBody extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const VerticalGap(39),
-        SvgPicture.asset(AppSvgs.san3aLogo),
-        Image.asset(AppImages.initialAuthLogo),
+        Image.asset(AppImages.logo),
         const VerticalGap(27),
         Text(
           LocaleKeys.authInitialLetStart.tr(),

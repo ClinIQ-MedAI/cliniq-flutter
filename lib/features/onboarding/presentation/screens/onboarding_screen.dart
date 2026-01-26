@@ -1,8 +1,8 @@
+import 'package:cliniq/core/utils/app_text_styles.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cliniq/core/utils/app_dark_colors.dart';
 import 'package:cliniq/core/utils/app_routes.dart';
-import 'package:cliniq/core/utils/app_svgs.dart';
 import 'package:cliniq/core/widgets/vertical_gap.dart';
 import 'package:cliniq/features/onboarding/data/sources/onboarding_local_data_source.dart';
 import 'package:cliniq/features/onboarding/presentation/widgets/custom_onboarding_item.dart';
@@ -66,7 +66,22 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
           GestureDetector(
             onTap: onNextButtonPressed,
-            child: SvgPicture.asset(AppSvgs.onboardingButton),
+            child: Container(
+              width: 327.w,
+              height: 56.h,
+              decoration: BoxDecoration(
+                color: Theme.of(context).primaryColor,
+                borderRadius: BorderRadius.circular(12.r),
+              ),
+              child: Center(
+                child: Text(
+                  "LocaleKeys.onboardingNext.tr(),",
+                  style: AppTextStyles.getTextStyle(
+                    16,
+                  ).copyWith(color: Theme.of(context).colorScheme.onPrimary),
+                ),
+              ),
+            ),
           ),
           const VerticalGap(20),
         ],

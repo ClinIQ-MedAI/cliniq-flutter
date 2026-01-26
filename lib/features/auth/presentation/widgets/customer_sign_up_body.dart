@@ -10,7 +10,6 @@ import 'package:cliniq/features/auth/data/models/user_sign_up_request_model.dart
 import 'package:cliniq/features/auth/domain/entities/user_sign_up_request_entity.dart';
 import 'package:cliniq/features/auth/presentation/providers/sign_up_provider.dart';
 import 'package:cliniq/features/auth/presentation/widgets/auth_switch_widget.dart';
-import 'package:cliniq/features/auth/presentation/widgets/confirm_terms_and_conditions_sign_up.dart';
 import 'package:cliniq/features/auth/presentation/widgets/labeled_form_field.dart';
 
 class CustomerSignUpBody extends ConsumerStatefulWidget {
@@ -30,7 +29,6 @@ class _CustomerSignUpBodyState extends ConsumerState<CustomerSignUpBody> {
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  bool isTermsAndConditionsChecked = false;
   bool isSignUpButtonEnabled = false;
 
   @override
@@ -49,20 +47,12 @@ class _CustomerSignUpBodyState extends ConsumerState<CustomerSignUpBody> {
         passwordController.text.isNotEmpty &&
         confirmPasswordController.text.isNotEmpty &&
         nationalIdController.text.isNotEmpty &&
-        nameController.text.isNotEmpty &&
-        isTermsAndConditionsChecked;
+        nameController.text.isNotEmpty;
     if (isFilled != isSignUpButtonEnabled) {
       setState(() {
         isSignUpButtonEnabled = isFilled;
       });
     }
-  }
-
-  void _onTermsAndConditionsChanged(bool value) {
-    setState(() {
-      isTermsAndConditionsChecked = value;
-    });
-    checkFormFilled();
   }
 
   void onCreateAccountPressed() {
@@ -146,12 +136,6 @@ class _CustomerSignUpBodyState extends ConsumerState<CustomerSignUpBody> {
               value,
               passwordController.text,
             ),
-          ),
-
-          const VerticalGap(16),
-          ConfirmTermsAndConditionsSignUp(
-            initialValue: false,
-            onChanged: _onTermsAndConditionsChanged,
           ),
           const VerticalGap(25),
           CustomButton(
