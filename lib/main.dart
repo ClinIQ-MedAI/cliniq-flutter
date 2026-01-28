@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cliniq/core/cubits/app_theme_cubit/app_theme_cubit.dart';
@@ -20,7 +21,8 @@ import 'package:cliniq/core/widgets/developer_overlay.dart';
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   await setupGetIt();
   await EasyLocalization.ensureInitialized();
   await AppStorageHelper.init();
@@ -53,6 +55,7 @@ class _ClinIqState extends State<ClinIq> {
   void initState() {
     super.initState();
     appThemeCubit = AppThemeCubit();
+    FlutterNativeSplash.remove();
   }
 
   @override
