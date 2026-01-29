@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:cliniq/features/auth/presentation/screens/initial_auth_screen.dart';
+import 'package:cliniq/features/auth/presentation/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:cliniq/core/constants/storage_keys.dart';
 import 'package:cliniq/core/helpers/app_storage_helper.dart';
@@ -21,5 +21,5 @@ Widget getInitialRoute() {
   // if (isLoggedIn) {
   //   return const HomeScreen();
   // }
-  return const InitialAuthScreen();
+  return const LoginScreen();
 }

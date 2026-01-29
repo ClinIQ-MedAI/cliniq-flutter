@@ -31,7 +31,7 @@ class _ResetPasswordScreenState extends ConsumerState<ResetPasswordScreen> {
   void goToLoginScreen() {
     Navigator.pushNamedAndRemoveUntil(
       context,
-      Routes.initialAuthScreen,
+      Routes.loginScreen,
       (route) => false,
     );
     Navigator.pushNamed(context, Routes.loginScreen);

@@ -1,6 +1,5 @@
 class Routes {
   // auth
-  static const String initialAuthScreen = "/initialAuthScreen";
   static const String loginScreen = "/loginScreen";
   static const String createNewAccountScreen = "/createNewAccountScreen";
   static const String forgetPasswordScreen = "/forgetPasswordScreen";
