@@ -18,29 +18,74 @@ class OnboardingScreen extends StatefulWidget {
   State<OnboardingScreen> createState() => _OnboardingScreenState();
 }
 
-class _OnboardingScreenState extends State<OnboardingScreen> {
+class _OnboardingScreenState extends State<OnboardingScreen>
+    with SingleTickerProviderStateMixin {
   final PageController pageController = PageController();
   int currentIndex = 0;
 
-  onNextButtonPressed() {
+  late AnimationController _animationController;
+  late Animation<double> _sweepAnimation;
+  double _previousSweepAngle = 0;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 500),
+    );
+
+    _sweepAnimation = Tween<double>(begin: 0, end: 0).animate(
+      CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
+    );
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    pageController.dispose();
+    super.dispose();
+  }
+
+  void animateSweep(double newSweepAngle) {
+    _sweepAnimation =
+        Tween<double>(begin: _previousSweepAngle, end: newSweepAngle).animate(
+          CurvedAnimation(
+            parent: _animationController,
+            curve: Curves.easeInOut,
+          ),
+        );
+
+    _animationController
+      ..reset()
+      ..forward();
+
+    _previousSweepAngle = newSweepAngle;
+  }
+
+  onNextButtonPressed() async {
     if (currentIndex < onboardingList.length - 1) {
       pageController.nextPage(
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
       );
     } else {
-      Navigator.pushNamedAndRemoveUntil(
-        context,
-        Routes.loginScreen,
-        (route) => false,
-      );
-
-      AppStorageHelper.setBool(StorageKeys.isOnboardingCompleted, true);
+      await AppStorageHelper.setBool(StorageKeys.isOnboardingCompleted, true);
+      navigateToLoginScreen();
     }
   }
 
-  double getSweepAngle() {
-    switch (currentIndex) {
+  navigateToLoginScreen() {
+    Navigator.pushNamedAndRemoveUntil(
+      context,
+      Routes.loginScreen,
+      (route) => false,
+    );
+  }
+
+  double getSweepAngle(int index) {
+    switch (index) {
       case 0:
         return 0;
       case 1:
@@ -62,6 +107,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               controller: pageController,
               itemCount: onboardingList.length,
               onPageChanged: (index) {
+                animateSweep(getSweepAngle(index));
                 setState(() => currentIndex = index);
               },
               itemBuilder: (context, index) {
@@ -84,12 +130,17 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 SizedBox(
                   width: 76.w,
                   height: 76.w,
-                  child: CustomPaint(
-                    painter: OnboardingProgressPainter(
-                      sweepAngle: getSweepAngle(),
-                      color: Theme.of(context).primaryColor,
-                      strokeWidth: 5,
-                    ),
+                  child: AnimatedBuilder(
+                    animation: _sweepAnimation,
+                    builder: (context, child) {
+                      return CustomPaint(
+                        painter: OnboardingProgressPainter(
+                          sweepAngle: _sweepAnimation.value,
+                          color: Theme.of(context).primaryColor,
+                          strokeWidth: 5,
+                        ),
+                      );
+                    },
                   ),
                 ),
 
