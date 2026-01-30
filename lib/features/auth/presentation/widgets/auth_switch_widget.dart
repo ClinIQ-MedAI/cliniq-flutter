@@ -1,36 +1,42 @@
-import 'package:cliniq/core/utils/app_theme_extension.dart';
-import 'package:flutter/material.dart';
 import 'package:cliniq/core/utils/app_text_styles.dart';
+import 'package:cliniq/core/utils/app_theme_extension.dart';
+import 'package:cliniq/core/widgets/horizontal_gap.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
 
 class AuthSwitchWidget extends StatelessWidget {
+  final String text;
+  final String actionText;
+  final VoidCallback onActionTap;
+
   const AuthSwitchWidget({
     super.key,
-    required this.title,
-    required this.buttonDescription,
-    this.onButtonPressed,
+    required this.text,
+    required this.actionText,
+    required this.onActionTap,
   });
-  final String title;
-  final String buttonDescription;
-  final VoidCallback? onButtonPressed;
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          title,
-          style: AppTextStyles.getTextStyle(14).copyWith(
-            color: context.textPalette.secondaryColor.withValues(alpha: 0.5),
-          ),
+          text.tr(),
+          style: AppTextStyles.getTextStyle(
+            13,
+          ).copyWith(color: context.textPalette.primaryColor),
         ),
-        TextButton(
-          onPressed: onButtonPressed,
+        const HorizontalGap(4),
+        GestureDetector(
+          onTap: onActionTap,
           child: Text(
-            buttonDescription,
-            style: AppTextStyles.getTextStyle(
-              14,
-            ).copyWith(color: Theme.of(context).primaryColor),
+            actionText.tr(),
+            style: AppTextStyles.getTextStyle(13).copyWith(
+              fontWeight: FontWeight.w700,
+              color: context.theme.primaryColor,
+            ),
           ),
         ),
       ],
