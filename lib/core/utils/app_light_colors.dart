@@ -10,7 +10,7 @@ class AppLightColors {
   static const Color backgroundColor = Color(0xFFFFFFFF);
   static const Color onBackground = Color(0xFF000000);
 
-  static const Color disabledColor = Color(0xFF6E737A);
+  static const Color disabledColor = Color(0xFFE4E6EA);
 
   /// Elevated cards / prominent containers
   static const Color surfaceContainerHigh = Color(0xFFC3C3C3);

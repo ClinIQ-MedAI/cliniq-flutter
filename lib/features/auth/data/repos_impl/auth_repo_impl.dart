@@ -32,7 +32,7 @@ class AuthRepoImpl extends BaseRepoImpl implements AuthRepo {
       },
     ).onSuccess((data) async {
       log("user data: ${data.toString()}");
-      final accessToken = data[ApiKeys.token];
+      final accessToken = data['data'][ApiKeys.token];
       await AppStorageHelper.setSecureData(
         StorageKeys.accessToken,
         accessToken,
@@ -40,21 +40,15 @@ class AuthRepoImpl extends BaseRepoImpl implements AuthRepo {
 
       await AppStorageHelper.setSecureData(
         StorageKeys.refreshToken,
-        data[ApiKeys.refreshToken],
+        data['data'][ApiKeys.refreshToken],
       );
 
-      log("access token is saved in secure data");
       await AppStorageHelper.setBool(StorageKeys.isLoggedIn, true);
 
       // await saveJsonDataLocally(
       //   storageKey: StorageKeys.currentUser,
       //   json: result["data"]["account"],
       // );
-
-      // TODO: update later after back update it
-      final userRole = data["role"] ?? Role.user.name;
-      log("save current role: $userRole");
-      await AppStorageHelper.setString(StorageKeys.userRole, userRole);
 
       await AppStorageHelper.deleteSecureData(StorageKeys.resetToken);
     }).asVoid();
