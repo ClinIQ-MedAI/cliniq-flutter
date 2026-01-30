@@ -12,7 +12,6 @@ class LabeledFormField extends StatelessWidget {
     this.controller,
     required this.label,
     required this.hint,
-    this.isRequired = true,
     this.isPassword = false,
     this.validator,
     this.keyboardType,
@@ -21,8 +20,7 @@ class LabeledFormField extends StatelessWidget {
   final TextEditingController? controller;
   final String label;
   final String hint;
-  final bool isRequired;
-  final bool isPassword; 
+  final bool isPassword;
   final String? Function(String?)? validator;
   final TextInputType? keyboardType;
 
@@ -31,39 +29,20 @@ class LabeledFormField extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          children: [
-            Text(
-              label.tr(),
-              style: AppTextStyles.getTextStyle(16).copyWith(
-                fontWeight: FontWeight.w600,
-                color: context.textPalette.primaryColor,
-              ),
-            ),
-            if (isRequired)
-              Text(
-                "*",
-                style: AppTextStyles.getTextStyle(16).copyWith(
-                  fontWeight: FontWeight.w600,
-                  color: context.textPalette.alertColor,
-                ),
-              ),
-          ],
+        Text(
+          label.tr(),
+          style: AppTextStyles.getTextStyle(16).copyWith(
+            fontWeight: FontWeight.w600,
+            color: context.textPalette.primaryColor,
+          ),
         ),
         const VerticalGap(16),
         if (isPassword)
           CustomPasswordTextField(
             controller: controller,
+            hintText: hint.tr(),
             validator: validator,
-            borderRadius: 8,
-            backgroundColor: context.inputTheme.highLightBackgroundColor,
             keyboardType: keyboardType,
-            hintStyle: AppTextStyles.getTextStyle(
-              16,
-            ).copyWith(color: context.textPalette.helperColor),
-            textStyle: AppTextStyles.getTextStyle(
-              16,
-            ).copyWith(color: context.textPalette.paragraphColor),
           )
         else
           CustomTextFormField(
@@ -71,14 +50,6 @@ class LabeledFormField extends StatelessWidget {
             validator: validator,
             hintText: hint.tr(),
             keyboardType: keyboardType,
-            borderRadius: 8,
-            backgroundColor: context.inputTheme.highLightBackgroundColor,
-            hintStyle: AppTextStyles.getTextStyle(
-              16,
-            ).copyWith(color: context.textPalette.helperColor),
-            textStyle: AppTextStyles.getTextStyle(
-              16,
-            ).copyWith(color: context.textPalette.paragraphColor),
           ),
       ],
     );

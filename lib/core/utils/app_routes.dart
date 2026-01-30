@@ -1,7 +1,7 @@
 class Routes {
   // auth
   static const String loginScreen = "/loginScreen";
-  static const String createNewAccountScreen = "/createNewAccountScreen";
+  static const String userSignUpScreen = "/userSignUpScreen";
   static const String forgetPasswordScreen = "/forgetPasswordScreen";
   static const String resetPasswordScreen = "/resetPasswordScreen";
   static const String verifyResetCodeScreen = "/verifyResetCodeScreen";

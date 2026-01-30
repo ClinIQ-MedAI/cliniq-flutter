@@ -8,7 +8,7 @@ abstract class LocaleKeys {
   // messages.failures
   static const messagesFailuresIncorrectCredentials =
       "messages.failures.incorrect_credentials";
-  static const messagesFailuresInactiveUser = "messages.failures.inactive_user";
+  static const messagesFailuresInactiveUser = "messages.failures.inactive.user";
   static const messagesFailuresUnexpectedError =
       "messages.failures.unexpected_error";
   static const messagesFailuresNationalIdAlreadyExists =
@@ -121,98 +121,28 @@ abstract class LocaleKeys {
       "auth_reset_password.confirm_password";
   static const authResetPasswordConfirm = "auth_reset_password.confirm";
 
-  // create_new_account
-  static const authCreateAccountTitle = "auth_create_account.title";
-
-  // choose_user_role
-  static const authCreateAccountChooseUserRoleCustomer =
-      "auth_create_account.choose_user_role.customer";
-  static const authCreateAccountChooseUserRoleCustomerDescription =
-      "auth_create_account.choose_user_role.customer_description";
-  static const authCreateAccountChooseUserRoleCraftsman =
-      "auth_create_account.choose_user_role.craftsman";
-  static const authCreateAccountChooseUserRoleCraftsmanDescription =
-      "auth_create_account.choose_user_role.craftsman_description";
-
-  // customer_signup
-  static const authCreateAccountCustomerSignupName =
-      "auth_create_account.customer_signup.name";
-  static const authCreateAccountCustomerSignupNameHint =
-      "auth_create_account.customer_signup.name_hint";
-  static const authCreateAccountCustomerSignupEmail =
-      "auth_create_account.customer_signup.email";
-  static const authCreateAccountCustomerSignupEmailHint =
-      "auth_create_account.customer_signup.email_hint";
-  static const authCreateAccountCustomerSignupNationalId =
-      "auth_create_account.customer_signup.national_id";
-  static const authCreateAccountCustomerSignupNationalIdHint =
-      "auth_create_account.customer_signup.national_id_hint";
-  static const authCreateAccountCustomerSignupGovernorate =
-      "auth_create_account.customer_signup.governorate";
-  static const authCreateAccountCustomerSignupGovernorateHint =
-      "auth_create_account.customer_signup.governorate_hint";
-  static const authCreateAccountCustomerSignupPassword =
-      "auth_create_account.customer_signup.password";
-  static const authCreateAccountCustomerSignupPasswordHint =
-      "auth_create_account.customer_signup.password_hint";
-  static const authCreateAccountCustomerSignupConfirmPassword =
-      "auth_create_account.customer_signup.confirm_password";
-  static const authCreateAccountCustomerSignupConfirmPasswordHint =
-      "auth_create_account.customer_signup.confirm_password_hint";
-  static const authCreateAccountCustomerSignupAgreeTerms =
-      "auth_create_account.customer_signup.agree_terms";
-  static const authCreateAccountCustomerSignupAgreeTermsText =
-      "auth_create_account.customer_signup.agree_terms_text";
-  static const authCreateAccountCustomerSignupCreateAccountButton =
-      "auth_create_account.customer_signup.create_account_button";
-  static const authCreateAccountCustomerSignupAlreadyHaveAccount =
-      "auth_create_account.customer_signup.already_have_account";
-  static const authCreateAccountCustomerSignupLoginButton =
-      "auth_create_account.customer_signup.login_button";
-
-  // craftsman_signup
-  static const authCreateAccountCraftsmanSignupCraft =
-      "auth_create_account.craftsman_signup.craft";
-  static const authCreateAccountCraftsmanSignupOther =
-      "auth_create_account.craftsman_signup.other";
-  static const authCreateAccountCraftsmanSignupEnterCraft =
-      "auth_create_account.craftsman_signup.enter_craft";
-  static const authCreateAccountCraftsmanSignupWriteCraft =
-      "auth_create_account.craftsman_signup.write_craft";
-  static const authCreateAccountCraftsmanSignupSampleCraft =
-      "auth_create_account.craftsman_signup.sample_craft";
-  static const authCreateAccountCraftsmanSignupName =
-      "auth_create_account.craftsman_signup.name";
-  static const authCreateAccountCraftsmanSignupNameHint =
-      "auth_create_account.craftsman_signup.name_hint";
-  static const authCreateAccountCraftsmanSignupEmail =
-      "auth_create_account.craftsman_signup.email";
-  static const authCreateAccountCraftsmanSignupEmailHint =
-      "auth_create_account.craftsman_signup.email_hint";
-  static const authCreateAccountCraftsmanSignupNationalId =
-      "auth_create_account.craftsman_signup.national_id";
-  static const authCreateAccountCraftsmanSignupNationalIdHint =
-      "auth_create_account.craftsman_signup.national_id_hint";
-  static const authCreateAccountCraftsmanSignupGovernorate =
-      "auth_create_account.craftsman_signup.governorate";
-  static const authCreateAccountCraftsmanSignupGovernorateHint =
-      "auth_create_account.craftsman_signup.governorate_hint";
-  static const authCreateAccountCraftsmanSignupPassword =
-      "auth_create_account.craftsman_signup.password";
-  static const authCreateAccountCraftsmanSignupPasswordHint =
-      "auth_create_account.craftsman_signup.password_hint";
-  static const authCreateAccountCraftsmanSignupConfirmPassword =
-      "auth_create_account.craftsman_signup.confirm_password";
-  static const authCreateAccountCraftsmanSignupConfirmPasswordHint =
-      "auth_create_account.craftsman_signup.confirm_password_hint";
-  static const authCreateAccountCraftsmanSignupAgreeTerms =
-      "auth_create_account.craftsman_signup.agree_terms";
-  static const authCreateAccountCraftsmanSignupCreateAccountButton =
-      "auth_create_account.craftsman_signup.create_account_button";
-  static const authCreateAccountCraftsmanSignupAlreadyHaveAccount =
-      "auth_create_account.craftsman_signup.already_have_account";
-  static const authCreateAccountCraftsmanSignupLoginButton =
-      "auth_create_account.craftsman_signup.login_button";
+  // signup/user
+  static const signupUserName = "signup.user.name";
+  static const signupUserNameHint = "signup.user.name_hint";
+  static const signupUserEmail = "signup.user.email";
+  static const signupUserEmailHint = "signup.user.email_hint";
+  static const signupUserGender = "signup.user.gender";
+  static const signupUserGenderHint = "signup.user.gender_hint";
+  static const signupUserPhone = "signup.user.phone";
+  static const signupUserPhoneHint = "signup.user.phone_hint";
+  static const signupUserBirthDate = "signup.user.birth_date";
+  static const signupUserBirthDateHint = "signup.user.birth_date_hint";
+  static const signupUserPassword = "signup.user.password";
+  static const signupUserPasswordHint = "signup.user.password_hint";
+  static const signupUserConfirmPassword = "signup.user.confirm_password";
+  static const signupUserConfirmPasswordHint =
+      "signup.user.confirm_password_hint";
+  static const signupUserinticateFingerprint =
+      "signup.user.inticate_fingerprint";
+  static const signupUserSubmitButton = "signup.user.submit_button";
+  static const signupUserAlreadyHaveAccount =
+      "signup.user.already_have_account";
+  static const signupUserLoginButton = "signup.user.login_button";
 
   // verify_email
   static const authCreateAccountVerifyEmailTitle =

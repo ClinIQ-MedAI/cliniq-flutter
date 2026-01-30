@@ -8,7 +8,6 @@ import 'package:cliniq/features/auth/presentation/widgets/auth_switch_widget.dar
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cliniq/core/constants/locale_keys.dart';
 import 'package:cliniq/core/utils/app_routes.dart';
 import 'package:cliniq/core/utils/app_text_styles.dart';
@@ -68,67 +67,64 @@ class _LoginBodyState extends ConsumerState<LoginBody> {
   void onGoogleLoginTap() {}
 
   void onCreateNewAccountTap() {
-    Navigator.pushNamed(context, Routes.createNewAccountScreen);
+    Navigator.pushNamed(context, Routes.userSignUpScreen);
   }
 
   @override
   Widget build(BuildContext context) {
     return AuthPageLayout(
       topSection: Image.asset(AppImages.loginLogo),
-      bottomSection: RPadding(
-        padding: const EdgeInsets.symmetric(horizontal: 35),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const VerticalGap(45),
-              CustomTextFormField(
-                controller: emailController,
-                hintText: LocaleKeys.authLoginEmailHint,
-              ),
-              const VerticalGap(32),
-              CustomPasswordTextField(
-                controller: passwordController,
-                hintText: LocaleKeys.authLoginPasswordHint,
-              ),
-              const VerticalGap(12),
-              Container(
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: context.isDark
-                          ? Color(0xFFFFFFFF).withValues(alpha: 0.1)
-                          : Color(0xFF000000).withValues(alpha: 0.1),
-                      offset: Offset(0, 4),
-                      blurRadius: 4,
-                      spreadRadius: 0,
-                    ),
-                  ],
-                ),
-                child: GestureDetector(
-                  onTap: onForgotPasswordTap,
-                  child: Text(
-                    LocaleKeys.authLoginForgotPassword.tr(),
-                    style: AppTextStyles.getTextStyle(
-                      10,
-                    ).copyWith(color: context.theme.primaryColor),
+      bottomSection: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const VerticalGap(45),
+            CustomTextFormField(
+              controller: emailController,
+              hintText: LocaleKeys.authLoginEmailHint,
+            ),
+            const VerticalGap(32),
+            CustomPasswordTextField(
+              controller: passwordController,
+              hintText: LocaleKeys.authLoginPasswordHint,
+            ),
+            const VerticalGap(12),
+            Container(
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: context.isDark
+                        ? Color(0xFFFFFFFF).withValues(alpha: 0.1)
+                        : Color(0xFF000000).withValues(alpha: 0.1),
+                    offset: Offset(0, 4),
+                    blurRadius: 4,
+                    spreadRadius: 0,
                   ),
+                ],
+              ),
+              child: GestureDetector(
+                onTap: onForgotPasswordTap,
+                child: Text(
+                  LocaleKeys.authLoginForgotPassword.tr(),
+                  style: AppTextStyles.getTextStyle(
+                    10,
+                  ).copyWith(color: context.theme.primaryColor),
                 ),
               ),
-              const VerticalGap(85),
-              CustomButton(
-                text: LocaleKeys.authLoginButton.tr(),
-                onPressed: submitLoginForm,
-                isDisabled: !isButtonEnabled,
-              ),
-              const VerticalGap(36),
-              AuthSwitchWidget(
-                text: LocaleKeys.authLoginDontHaveAnAccount,
-                actionText: LocaleKeys.authLoginSignUp,
-                onActionTap: onCreateNewAccountTap,
-              ),
-            ],
-          ),
+            ),
+            const VerticalGap(85),
+            CustomButton(
+              text: LocaleKeys.authLoginButton.tr(),
+              onPressed: submitLoginForm,
+              isDisabled: !isButtonEnabled,
+            ),
+            const VerticalGap(16),
+            AuthSwitchWidget(
+              text: LocaleKeys.authLoginDontHaveAnAccount,
+              actionText: LocaleKeys.authLoginSignUp,
+              onActionTap: onCreateNewAccountTap,
+            ),
+          ],
         ),
       ),
     );

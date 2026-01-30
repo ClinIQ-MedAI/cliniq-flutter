@@ -81,41 +81,35 @@
         "confirm_password": "Confirm Password",
         "confirm": "Confirm"
     },
-    "auth_create_account": {
-        "title": "Create New Account",
-        "choose_user_role": {
-            "customer": "Customer",
-            "customer_description": "Create an account to request services",
-            "craftsman": "Craftsman",
-            "craftsman_description": "Create an account to offer your services"
-        },
-        "signup": {
+    "signup": {
+        "user": {
             "name": "Name",
-            "name_hint": "Your full name",
+            "name_hint": "Enter Name",
             "email": "Email",
-            "email_hint": "san3a@gmail.com",
-            "national_id": "National ID",
-            "national_id_hint": "0 0000 0000 00000",
-            "governorate": "Governorate",
-            "governorate_hint": "Cairo",
+            "email_hint": "Enter Email",
             "password": "Password",
-            "password_hint": "********",
+            "password_hint": "Enter Password",
             "confirm_password": "Confirm Password",
-            "confirm_password_hint": "********",
-            "agree_terms": "By creating a new account, you agree to the",
-            "agree_terms_text": "Terms & Conditions",
-            "create_account_button": "Create Account",
+            "confirm_password_hint": "Enter Confirm Password",
+            "gender": "Gender",
+            "gender_hint": "Select Gender",
+            "phone": "Phone",
+            "phone_hint": "Enter Your Phone Number",
             "already_have_account": "Already have an account?",
-            "login_button": "Log In"
-        },
-        "verify_email": {
-            "title": "Verify Email",
-            "enter_code": "Enter the 4-digit code to verify your email",
-            "enter_code_sent": "Enter the 4-digit code sent to your email",
-            "confirm": "Confirm",
-            "resend_code": "Resend Code",
-            "invalid_code": "Incorrect code. Please enter the correct code.",
-            "success_registration": "Registration completed successfully"
+            "login_button": "Log In",
+            "submit_button": "Submit",
+            "birth_date": "Date of Birth",
+            "birth_date_hint": "DD MM YYYY",
+            "authenticate_fingerprint": "Authenticate your fingerprint for sign in"
         }
+    },
+    "verify_email": {
+        "title": "Verify Email",
+        "enter_code": "Enter the 4-digit code to verify your email",
+        "enter_code_sent": "Enter the 4-digit code sent to your email",
+        "confirm": "Confirm",
+        "resend_code": "Resend Code",
+        "invalid_code": "Incorrect code. Please enter the correct code.",
+        "success_registration": "Registration completed successfully"
     }
 }

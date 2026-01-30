@@ -1,4 +1,5 @@
 import 'package:cliniq/core/utils/app_theme_extension.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cliniq/core/utils/app_text_styles.dart';
@@ -58,7 +59,7 @@ class CustomButton extends StatelessWidget {
             child ??
             Center(
               child: Text(
-                text ?? '',
+                text?.tr() ?? '',
                 style: AppTextStyles.getTextStyle(textFontSize).copyWith(
                   color: isDisabled
                       ? context.textPalette.primaryColor
