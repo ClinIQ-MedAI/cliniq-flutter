@@ -6,7 +6,8 @@ class UserSignUpRequestModel extends UserSignUpRequestEntity {
     required super.email,
     required super.password,
     required super.passwordConfirm,
-    required super.nationalId,
+    required super.phone,
+    required super.gender,
   });
 
   Map<String, dynamic> toJson() {
@@ -15,7 +16,8 @@ class UserSignUpRequestModel extends UserSignUpRequestEntity {
       'email': email,
       'password': password,
       'confirmPassword': passwordConfirm,
-      'nationalId': nationalId,
+      'phone': phone,
+      'gender': gender.name,
     };
   }
 
@@ -25,7 +27,8 @@ class UserSignUpRequestModel extends UserSignUpRequestEntity {
       email: entity.email,
       password: entity.password,
       passwordConfirm: entity.passwordConfirm,
-      nationalId: entity.nationalId,
+      phone: entity.phone,
+      gender: entity.gender,
     );
   }
 }

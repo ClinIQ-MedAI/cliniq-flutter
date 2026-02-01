@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:cliniq/core/utils/app_constants.dart';
 import 'package:cliniq/core/utils/app_text_styles.dart';
@@ -11,8 +12,7 @@ void showCustomSnackBar(
 }) {
   final snackBar = SnackBar(
     content: Text(
-      // TODO: use .tr() later after api
-      message,
+      message.tr(),
       style: AppTextStyles.getTextStyle(16).copyWith(color: Colors.white),
     ),
     showCloseIcon: showCloseIcon,

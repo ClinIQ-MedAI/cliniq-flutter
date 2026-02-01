@@ -20,7 +20,7 @@ class SignUpNotifier extends AsyncNotifier<Success?> {
         .read(getAuthRepoProvider)
         .signUp(data: data)
         .onSuccess((_) async {
-          state = const AsyncData(Success());
+          state = AsyncData(Success(data: data));
         })
         .onFailure((l) {
           state = AsyncError(l, StackTrace.current);

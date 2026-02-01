@@ -58,24 +58,15 @@ class AuthRepoImpl extends BaseRepoImpl implements AuthRepo {
   Future<Either<Failure, void>> signUp({
     required Map<String, dynamic> data,
   }) async {
-    final userRole = AppStorageHelper.getString(StorageKeys.userRole);
-
-    log("user role: $userRole");
-    final endPoint = userRole == Role.user.name
-        ? EndPoints.customerSignUp
-        : EndPoints.craftmanSignUp;
-
     return handleApi(
-      () => api.post(endPoint, data: data),
+      () => api.post(EndPoints.userSignUp, data: data),
       backendMessageMapping: {
         'National ID already exists':
             LocaleKeys.messagesFailuresNationalIdAlreadyExists,
         'Username \'${data['email'].split('@')[0]}\' is already taken.':
             LocaleKeys.messagesFailuresAccountAlreadyExists,
       },
-    ).onSuccess((_) async {
-      await AppStorageHelper.setString(StorageKeys.userEmail, data['email']);
-    }).asVoid();
+    ).asVoid();
   }
 
   @override

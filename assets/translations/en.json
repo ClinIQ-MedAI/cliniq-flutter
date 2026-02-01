@@ -2,7 +2,8 @@
     "messages": {
         "success": {
             "verification_code_sent": "A verification code has been sent to your email.",
-            "new_verification_code_sent": "A new verification code has been sent to your email."
+            "new_verification_code_sent": "A new verification code has been sent to your email.",
+            "account_created_successfully": "Account created successfully"
         },
         "failures": {
             "incorrect_credentials": "Incorrect email or password. Please try again.",

@@ -7,7 +7,6 @@ import 'package:cliniq/core/widgets/custom_dropdown_form_field.dart';
 
 class LabeledDropdownFormField extends StatelessWidget {
   final String title;
-  final bool isRequired;
   final String hintText;
   final String? helperText;
   final List<String> items;
@@ -15,6 +14,7 @@ class LabeledDropdownFormField extends StatelessWidget {
   final EdgeInsetsGeometry? contentPadding;
   final String? selectedValue;
   final TextStyle? valueStyle;
+  final String? Function(String?)? validator;
 
   const LabeledDropdownFormField({
     super.key,
@@ -22,11 +22,11 @@ class LabeledDropdownFormField extends StatelessWidget {
     required this.hintText,
     required this.items,
     required this.onChanged,
-    this.isRequired = true,
     this.helperText,
     this.contentPadding,
     this.selectedValue,
     this.valueStyle,
+    this.validator,
   });
 
   @override
@@ -34,24 +34,12 @@ class LabeledDropdownFormField extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          children: [
-            Text(
-              title.tr(),
-              style: AppTextStyles.getTextStyle(16).copyWith(
-                fontWeight: FontWeight.w600,
-                color: context.textPalette.primaryColor,
-              ),
-            ),
-            if (isRequired)
-              Text(
-                "*",
-                style: AppTextStyles.getTextStyle(16).copyWith(
-                  fontWeight: FontWeight.w600,
-                  color: context.textPalette.alertColor,
-                ),
-              ),
-          ],
+        Text(
+          title.tr(),
+          style: AppTextStyles.getTextStyle(16).copyWith(
+            fontWeight: FontWeight.w600,
+            color: context.textPalette.primaryColor,
+          ),
         ),
         const VerticalGap(16),
         CustomDropdownFormField(
@@ -62,6 +50,7 @@ class LabeledDropdownFormField extends StatelessWidget {
           contentPadding: contentPadding,
           selectedValue: selectedValue,
           valueStyle: valueStyle,
+          validator: validator,
         ),
       ],
     );

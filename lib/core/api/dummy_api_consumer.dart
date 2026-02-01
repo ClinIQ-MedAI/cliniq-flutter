@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:cliniq/core/api/api_consumer.dart';
 import 'package:cliniq/core/dummy/dummy_responses.dart';
@@ -21,6 +22,7 @@ class DummyApiConsumer extends ApiConsumer {
     Map<String, dynamic>? queryParameters,
     bool isFromData = false,
   }) async {
+    log(data.toString());
     await Future.delayed(const Duration(seconds: 1));
     return DummyResponses.getResponse(path);
   }

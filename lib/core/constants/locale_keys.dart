@@ -4,6 +4,8 @@ abstract class LocaleKeys {
       "messages.success.verification_code_sent";
   static const messagesSuccessNewVerificationCodeSent =
       "messages.success.new_verification_code_sent";
+  static const messagesSuccessAccountCreatedSuccessfully =
+      "messages.success.account_created_successfully";
 
   // messages.failures
   static const messagesFailuresIncorrectCredentials =

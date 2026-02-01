@@ -1,6 +1,8 @@
+import 'package:cliniq/core/enums/gender.dart';
 import 'package:cliniq/core/utils/app_images.dart';
 import 'package:cliniq/features/auth/presentation/widgets/auth_page_layout.dart';
 import 'package:cliniq/features/auth/presentation/widgets/auth_switch_widget.dart';
+import 'package:cliniq/features/auth/presentation/widgets/labeled_dropdown_form_field.dart';
 import 'package:cliniq/features/auth/presentation/widgets/labeled_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -23,23 +25,24 @@ class UserSignUpBody extends ConsumerStatefulWidget {
 class UserSignUpBodyState extends ConsumerState<UserSignUpBody> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
-  final TextEditingController nationalIdController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   bool isSignUpButtonEnabled = false;
+  Gender? selectedGender;
 
   @override
   void initState() {
     super.initState();
     nameController.addListener(checkFormFilled);
     emailController.addListener(checkFormFilled);
-    nationalIdController.addListener(checkFormFilled);
     passwordController.addListener(checkFormFilled);
     confirmPasswordController.addListener(checkFormFilled);
+    phoneController.addListener(checkFormFilled);
   }
 
   void checkFormFilled() {
@@ -47,8 +50,9 @@ class UserSignUpBodyState extends ConsumerState<UserSignUpBody> {
         emailController.text.isNotEmpty &&
         passwordController.text.isNotEmpty &&
         confirmPasswordController.text.isNotEmpty &&
-        nationalIdController.text.isNotEmpty &&
-        nameController.text.isNotEmpty;
+        nameController.text.isNotEmpty &&
+        phoneController.text.isNotEmpty &&
+        selectedGender != null;
     if (isFilled != isSignUpButtonEnabled) {
       setState(() {
         isSignUpButtonEnabled = isFilled;
@@ -64,7 +68,8 @@ class UserSignUpBodyState extends ConsumerState<UserSignUpBody> {
             email: emailController.text,
             password: passwordController.text,
             passwordConfirm: confirmPasswordController.text,
-            nationalId: nationalIdController.text,
+            phone: phoneController.text,
+            gender: selectedGender!,
           );
 
       final data = UserSignUpRequestModel.fromEntity(
@@ -82,9 +87,9 @@ class UserSignUpBodyState extends ConsumerState<UserSignUpBody> {
   void dispose() {
     nameController.dispose();
     emailController.dispose();
-    nationalIdController.dispose();
     passwordController.dispose();
     confirmPasswordController.dispose();
+    phoneController.dispose();
     super.dispose();
   }
 
@@ -95,58 +100,84 @@ class UserSignUpBodyState extends ConsumerState<UserSignUpBody> {
       topSection: Image.asset(AppImages.signUpLogo),
       bottomSection: Form(
         key: formKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const VerticalGap(24),
-            LabeledFormField(
-              controller: nameController,
-              validator: Validators.validateNormalText,
-              label: LocaleKeys.signupUserName,
-              hint: LocaleKeys.signupUserNameHint,
-              keyboardType: TextInputType.name,
-            ),
-
-            const VerticalGap(15),
-            LabeledFormField(
-              controller: emailController,
-              label: LocaleKeys.signupUserEmail,
-              hint: LocaleKeys.signupUserEmailHint,
-              validator: Validators.validateEmail,
-            ),
-            const VerticalGap(15),
-            LabeledFormField(
-              controller: passwordController,
-              label: LocaleKeys.signupUserPassword,
-              hint: LocaleKeys.signupUserPasswordHint,
-              isPassword: true,
-              validator: Validators.validatePassword,
-            ),
-
-            const VerticalGap(15),
-            LabeledFormField(
-              controller: confirmPasswordController,
-              label: LocaleKeys.signupUserConfirmPassword,
-              hint: LocaleKeys.signupUserConfirmPasswordHint,
-              isPassword: true,
-              validator: (value) => Validators.confirmPasswordValidator(
-                value,
-                passwordController.text,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const VerticalGap(24),
+              LabeledFormField(
+                controller: nameController,
+                validator: Validators.validateNormalText,
+                label: LocaleKeys.signupUserName,
+                hint: LocaleKeys.signupUserNameHint,
+                keyboardType: TextInputType.name,
               ),
-            ),
-            const VerticalGap(25),
-            CustomButton(
-              isDisabled: !isSignUpButtonEnabled,
-              onPressed: onCreateAccountPressed,
-              text: LocaleKeys.signupUserSubmitButton,
-            ),
-            const VerticalGap(16),
-            AuthSwitchWidget(
-              text: LocaleKeys.signupUserAlreadyHaveAccount,
-              actionText: LocaleKeys.signupUserLoginButton,
-              onActionTap: onLoginButtonPressed,
-            ),
-          ],
+
+              const VerticalGap(15),
+              LabeledFormField(
+                controller: emailController,
+                label: LocaleKeys.signupUserEmail,
+                hint: LocaleKeys.signupUserEmailHint,
+                validator: Validators.validateEmail,
+              ),
+              const VerticalGap(15),
+              LabeledDropdownFormField(
+                title: LocaleKeys.signupUserGender,
+                hintText: LocaleKeys.signupUserGenderHint,
+                items: Gender.values.map((e) => e.name).toList(),
+                validator: Validators.validateNormalText,
+                onChanged: (value) {
+                  setState(() {
+                    selectedGender = Gender.values.firstWhere(
+                      (e) => e.name == value,
+                    );
+                  });
+                },
+                selectedValue: selectedGender?.name,
+              ),
+              const VerticalGap(15),
+              LabeledFormField(
+                controller: phoneController,
+                label: LocaleKeys.signupUserPhone,
+                hint: LocaleKeys.signupUserPhoneHint,
+                validator: Validators.validatePhoneNumber,
+              ),
+
+              const VerticalGap(15),
+              LabeledFormField(
+                controller: passwordController,
+                label: LocaleKeys.signupUserPassword,
+                hint: LocaleKeys.signupUserPasswordHint,
+                isPassword: true,
+                validator: Validators.validatePassword,
+              ),
+
+              const VerticalGap(15),
+              LabeledFormField(
+                controller: confirmPasswordController,
+                label: LocaleKeys.signupUserConfirmPassword,
+                hint: LocaleKeys.signupUserConfirmPasswordHint,
+                isPassword: true,
+                validator: (value) => Validators.confirmPasswordValidator(
+                  value,
+                  passwordController.text,
+                ),
+              ),
+              const VerticalGap(25),
+              CustomButton(
+                isDisabled: !isSignUpButtonEnabled,
+                onPressed: onCreateAccountPressed,
+                text: LocaleKeys.signupUserSubmitButton,
+              ),
+              const VerticalGap(16),
+              AuthSwitchWidget(
+                text: LocaleKeys.signupUserAlreadyHaveAccount,
+                actionText: LocaleKeys.signupUserLoginButton,
+                onActionTap: onLoginButtonPressed,
+              ),
+              const VerticalGap(32),
+            ],
+          ),
         ),
       ),
     );

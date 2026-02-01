@@ -30,9 +30,15 @@ class DummyResponses {
           },
         };
 
-      case EndPoints.customerSignUp:
-      case EndPoints.craftmanSignUp:
-        return {"success": true, "message": "Account created successfully"};
+      case EndPoints.userSignUp:
+      case EndPoints.doctorSignUp:
+        return {
+          "success": true,
+          "message": "Account created successfully",
+          "data": {
+            "email": "test@test.com",
+          },
+        };
 
       case EndPoints.verifyEmail:
       case EndPoints.resendVerifyEmail:
