@@ -64,31 +64,19 @@ abstract class LocaleKeys {
   static const validationGovernorateTooLong = "validation.governorate_too_long";
   static const validationPasswordMustContainNumber =
       "validation.password_must_contain_number";
+  static const validationBirthDateIsRequired =
+      "validation.birth_date_is_required";
+  static const validationInvalidBirthDate = "validation.invalid_birth_date";
 
   // onboarding
   static const onboardingTitle1 = "onboarding.title_1";
   static const onboardingDescription1 = "onboarding.description_1";
-
   static const onboardingTitle2 = "onboarding.title_2";
   static const onboardingDescription2 = "onboarding.description_2";
-
   static const onboardingTitle3 = "onboarding.title_3";
   static const onboardingDescription3 = "onboarding.description_3";
-
   static const onboardingTitle4 = "onboarding.title_4";
   static const onboardingDescription4 = "onboarding.description_4";
-
-  // auth_initial
-  static const authInitialLetStart = "auth_initial.let`s_start";
-  static const authInitialBestCraftsmenTitle =
-      "auth_initial.best_craftsmen_title";
-  static const authInitialLoginButton = "auth_initial.login_button";
-  static const authInitialCreateAccountButton =
-      "auth_initial.create_account_button";
-  static const authInitialCreateAccountAgreeText =
-      "auth_initial.create_account_agree_text";
-  static const authInitialTermsAndConditions =
-      "auth_initial.terms_and_conditions";
 
   // auth_login
   static const authLoginEmailHint = "auth_login.email_hint";
@@ -97,35 +85,6 @@ abstract class LocaleKeys {
   static const authLoginButton = "auth_login.login_button";
   static const authLoginSignUp = "auth_login.sign_up";
   static const authLoginDontHaveAnAccount = "auth_login.dont_have_an_account";
-
-  // forget_password
-  static const authForgetPasswordHelp = "auth_forget_password.help";
-  static const authForgetPasswordResetPassword =
-      "auth_forget_password.reset_password";
-  static const authForgetPasswordEnterEmail =
-      "auth_forget_password.enter_email";
-  static const authForgetPasswordCodeWillBeSent =
-      "auth_forget_password.code_will_be_sent";
-  static const authForgetPasswordSendCode = "auth_forget_password.send_code";
-
-  // verify_otp
-  static const authVerifyOtpHelp = "auth_verify_otp.help";
-  static const authVerifyOtpResetPassword = "auth_verify_otp.reset_password";
-  static const authVerifyOtpEnterOtp = "auth_verify_otp.enter_otp";
-  static const authVerifyOtpCodeSent = "auth_verify_otp.code_sent";
-  static const authVerifyOtpConfirm = "auth_verify_otp.confirm";
-  static const authVerifyOtpResendCode = "auth_verify_otp.resend_code";
-
-  // reset_password
-  static const authResetPasswordHelp = "auth_reset_password.help";
-  static const authResetPasswordResetPassword =
-      "auth_reset_password.reset_password";
-  static const authResetPasswordEnterNewPassword =
-      "auth_reset_password.enter_new_password";
-  static const authResetPasswordPassword = "auth_reset_password.password";
-  static const authResetPasswordConfirmPassword =
-      "auth_reset_password.confirm_password";
-  static const authResetPasswordConfirm = "auth_reset_password.confirm";
 
   // signup/user
   static const signupUserName = "signup.user.name";
@@ -148,6 +107,7 @@ abstract class LocaleKeys {
   static const signupUserSubmitButton = "signup.user.submit_button";
   static const signupUserAlreadyHaveAccount =
       "signup.user.already_have_account";
+  static const signupUserBirthDateButton = "signup.user.birth_date_button";
   static const signupUserLoginButton = "signup.user.login_button";
 
   // verify_email
@@ -156,4 +116,24 @@ abstract class LocaleKeys {
   static const verifyEmailResendCode = "verify_email.resend_code";
   static const verifyEmailVerifyOtp = "verify_email.verify_otp";
   static const verifyEmailDidntReceiveCode = "verify_email.didnt_receive_code";
+
+  // forget_password
+  static const forgetPasswordForgetPassword = "forget_password.forget_password";
+  static const forgetPasswordEmail = "forget_password.email";
+  static const forgetPasswordEmailHint = "forget_password.email_hint";
+  static const forgetPasswordSendOtp = "forget_password.send_otp";
+
+  // verify_otp
+  static const verifyOtpEnterCode = "verify_otp.enter_code";
+  static const verifyOtpCodeSent = "verify_otp.code_sent";
+  static const verifyOtpResendCode = "verify_otp.resend_code";
+  static const verifyOtpDidntReceiveCode = "verify_otp.didnt_receive_code";
+  static const verifyOtpVerifyOtp = "verify_otp.verify_otp";
+
+  // reset_password
+  static const resetPasswordSetNewPassword = "reset_password.set_new_password";
+  static const resetPasswordPasswordHint = "reset_password.password_hint";
+  static const resetPasswordConfirmPasswordHint =
+      "reset_password.confirm_password_hint";
+  static const resetPasswordReset = "reset_password.reset";
 }

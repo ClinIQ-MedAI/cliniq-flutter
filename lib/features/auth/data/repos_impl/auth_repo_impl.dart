@@ -138,10 +138,10 @@ class AuthRepoImpl extends BaseRepoImpl implements AuthRepo {
             LocaleKeys.messagesFailuresVerificationCodeNotFound,
       },
     ).onSuccess((result) async {
-      await AppStorageHelper.setSecureData(
-        StorageKeys.resetToken,
-        result[ApiKeys.resetToken],
-      );
+      // await AppStorageHelper.setSecureData(
+      //   StorageKeys.resetToken,
+      //   result[ApiKeys.resetToken],
+      // );
     }).asVoid();
   }
 

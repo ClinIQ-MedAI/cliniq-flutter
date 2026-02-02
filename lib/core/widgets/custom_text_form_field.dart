@@ -16,7 +16,7 @@ class CustomTextFormField extends StatelessWidget {
   final String? Function(String?)? validator;
   final TextEditingController? controller;
   final VoidCallback? onSuffixTap;
-  final VoidCallback? ontTap;
+  final VoidCallback? onTap;
   final AutovalidateMode? autovalidateMode;
   final int? maxLines;
   final double contentHorizontalPadding;
@@ -35,9 +35,10 @@ class CustomTextFormField extends StatelessWidget {
   final TextStyle? labelStyle;
   final TextStyle? helperStyle;
 
+
   const CustomTextFormField({
     super.key,
-    this.ontTap,
+    this.onTap,
     this.readOnly,
     this.hintText,
     this.labelText,
@@ -91,7 +92,7 @@ class CustomTextFormField extends StatelessWidget {
         validator: validator,
         keyboardType: keyboardType,
         maxLines: maxLines,
-        onTap: ontTap,
+        onTap: onTap,
         autovalidateMode: autovalidateMode,
         style:
             textStyle ??

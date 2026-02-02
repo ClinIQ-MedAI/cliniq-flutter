@@ -1,11 +1,11 @@
+import 'package:cliniq/core/utils/app_constants.dart';
+import 'package:cliniq/core/utils/app_images.dart';
 import 'package:cliniq/core/utils/app_theme_extension.dart';
+import 'package:cliniq/features/auth/presentation/widgets/auth_page_layout.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cliniq/core/constants/locale_keys.dart';
-import 'package:cliniq/core/constants/storage_keys.dart';
-import 'package:cliniq/core/helpers/app_storage_helper.dart';
 import 'package:cliniq/core/utils/app_text_styles.dart';
 import 'package:cliniq/core/widgets/custom_button.dart';
 import 'package:cliniq/core/widgets/vertical_gap.dart';
@@ -16,7 +16,9 @@ import 'package:cliniq/features/auth/presentation/widgets/custom_pinput_otp.dart
 import 'package:cliniq/features/auth/presentation/widgets/resend_code_button.dart';
 
 class VerifyResetCodeBody extends ConsumerStatefulWidget {
-  const VerifyResetCodeBody({super.key});
+  const VerifyResetCodeBody({super.key, required this.userEmail});
+
+  final String userEmail;
 
   @override
   ConsumerState<VerifyResetCodeBody> createState() =>
@@ -26,12 +28,10 @@ class VerifyResetCodeBody extends ConsumerStatefulWidget {
 class _VerifyResetCodeBodyState extends ConsumerState<VerifyResetCodeBody> {
   final TextEditingController otpController = TextEditingController();
   bool isButtonEnabled = false;
-  late String userEmail;
 
   @override
   void initState() {
     super.initState();
-    userEmail = AppStorageHelper.getString(StorageKeys.userEmail) ?? "";
     otpController.addListener(checkOtpLength);
 
     Future.microtask(() {
@@ -41,7 +41,8 @@ class _VerifyResetCodeBodyState extends ConsumerState<VerifyResetCodeBody> {
 
   void checkOtpLength() {
     final isFilled =
-        otpController.text.isNotEmpty && otpController.text.length == 4;
+        otpController.text.isNotEmpty &&
+        otpController.text.length == AppConstants.pinCodeLength;
     if (isFilled != isButtonEnabled) {
       setState(() {
         isButtonEnabled = isFilled;
@@ -59,57 +60,52 @@ class _VerifyResetCodeBodyState extends ConsumerState<VerifyResetCodeBody> {
   void onConfirmOtpTap() async {
     ref
         .read(verifyResetCodeProvider.notifier)
-        .verifyResetCode(email: userEmail, code: otpController.text);
+        .verifyResetCode(email: widget.userEmail, code: otpController.text);
   }
 
   void onResendOtpTap() {
-    ref.read(resendResetCodeProvider(userEmail));
+    ref.read(resendResetCodeProvider(widget.userEmail));
   }
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 19.w),
-      child: SingleChildScrollView(
+    return AuthPageLayout(
+      topSection: Image.asset(AppImages.verifyEmailLogo),
+      bottomSection: SingleChildScrollView(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const VerticalGap(45),
-            Text(
-              LocaleKeys.authForgetPasswordResetPassword.tr(),
-              style: AppTextStyles.getTextStyle(24).copyWith(
-                fontWeight: FontWeight.w700,
-                color: context.textPalette.primaryColor,
+            const VerticalGap(24),
+            Text.rich(
+              TextSpan(
+                children: [
+                  TextSpan(
+                    text: "${LocaleKeys.verifyOtpCodeSent.tr()} ",
+                    style: AppTextStyles.getTextStyle(18).copyWith(
+                      fontWeight: FontWeight.w700,
+                      color: context.textPalette.primaryColor,
+                    ),
+                  ),
+                  TextSpan(
+                    text: widget.userEmail,
+                    style: AppTextStyles.getTextStyle(
+                      18,
+                    ).copyWith(color: context.textPalette.secondaryColor),
+                  ),
+                ],
               ),
             ),
-            const VerticalGap(32),
-            Text(
-              LocaleKeys.authVerifyOtpEnterOtp.tr(),
-              textAlign: TextAlign.center,
-              style: AppTextStyles.getTextStyle(16).copyWith(
-                fontWeight: FontWeight.bold,
-                color: context.textPalette.headingColor,
-              ),
-            ),
-            const VerticalGap(10),
-            Text(
-              "${LocaleKeys.authVerifyOtpCodeSent.tr()} $userEmail",
-              textAlign: TextAlign.center,
-              style: AppTextStyles.getTextStyle(12).copyWith(
-                fontWeight: FontWeight.bold,
-                color: context.textPalette.secondaryColor,
-              ),
-            ),
-            const VerticalGap(89),
+            const VerticalGap(40),
             CustomPinputOtp(otpController: otpController),
-            const VerticalGap(28),
+            const VerticalGap(40),
+            ResendCodeButton(onResend: onResendOtpTap),
+            const VerticalGap(25),
             CustomButton(
               onPressed: onConfirmOtpTap,
               isDisabled: !isButtonEnabled,
-              text: LocaleKeys.authVerifyOtpConfirm.tr(),
+              text: LocaleKeys.verifyOtpVerifyOtp,
             ),
-            const VerticalGap(16),
-            ResendCodeButton(onResend: onResendOtpTap),
+
             const VerticalGap(24),
           ],
         ),

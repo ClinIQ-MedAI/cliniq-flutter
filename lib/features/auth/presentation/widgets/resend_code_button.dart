@@ -40,7 +40,7 @@ class ResendCodeButton extends ConsumerWidget {
                 }
               : null,
           child: Text(
-            LocaleKeys.authVerifyOtpResendCode.tr(),
+            LocaleKeys.verifyOtpResendCode.tr(),
             style: AppTextStyles.getTextStyle(14).copyWith(
               color: isEnabled
                   ? context.theme.primaryColor

@@ -40,7 +40,7 @@ class LabeledFormField extends StatelessWidget {
         if (isPassword)
           CustomPasswordTextField(
             controller: controller,
-            hintText: hint.tr(),
+            hintText: hint,
             validator: validator,
             keyboardType: keyboardType,
           )
@@ -48,7 +48,7 @@ class LabeledFormField extends StatelessWidget {
           CustomTextFormField(
             controller: controller,
             validator: validator,
-            hintText: hint.tr(),
+            hintText: hint,
             keyboardType: keyboardType,
           ),
       ],

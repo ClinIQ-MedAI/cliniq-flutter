@@ -1,18 +1,17 @@
+import 'package:cliniq/core/utils/app_images.dart';
 import 'package:cliniq/core/utils/app_theme_extension.dart';
+import 'package:cliniq/features/auth/presentation/widgets/auth_page_layout.dart';
+import 'package:cliniq/features/auth/presentation/widgets/labeled_form_field.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cliniq/core/constants/locale_keys.dart';
-import 'package:cliniq/core/constants/storage_keys.dart';
-import 'package:cliniq/core/helpers/app_storage_helper.dart';
 import 'package:cliniq/core/helpers/show_custom_snack_bar.dart';
 import 'package:cliniq/core/utils/app_routes.dart';
 import 'package:cliniq/core/utils/app_text_styles.dart';
 import 'package:cliniq/core/utils/success.dart';
 import 'package:cliniq/core/utils/validators.dart';
 import 'package:cliniq/core/widgets/custom_button.dart';
-import 'package:cliniq/core/widgets/custom_under_line_text_field.dart';
 import 'package:cliniq/core/widgets/vertical_gap.dart';
 import 'package:cliniq/features/auth/presentation/providers/forget_password_provider.dart';
 
@@ -51,13 +50,8 @@ class _ForgetPasswordBodyState extends ConsumerState<ForgetPasswordBody> {
     super.dispose();
   }
 
-  void onSendCodeTap() async {
+  void onSendCodeTap() {
     if (formKey.currentState!.validate()) {
-      await AppStorageHelper.setString(
-        StorageKeys.userEmail,
-        emailController.text,
-      );
-
       ref
           .read(forgetPasswordProvider.notifier)
           .forgetPassword(email: emailController.text);
@@ -65,13 +59,17 @@ class _ForgetPasswordBodyState extends ConsumerState<ForgetPasswordBody> {
   }
 
   void goToVerifyCodeScreen() {
-    Navigator.pushNamed(context, Routes.verifyResetCodeScreen);
+    Navigator.pushNamed(
+      context,
+      Routes.verifyResetCodeScreen,
+      arguments: {'email': emailController.text},
+    );
   }
 
   void listenOnForgetPasswordProvider() {
     ref.listen(forgetPasswordProvider, (previous, next) {
       if (next is AsyncError) {
-        showCustomSnackBar(context, next.error.toString().tr());
+        showCustomSnackBar(context, next.error.toString());
       } else if (next is AsyncData && next.value is Success) {
         goToVerifyCodeScreen();
       }
@@ -82,50 +80,38 @@ class _ForgetPasswordBodyState extends ConsumerState<ForgetPasswordBody> {
   Widget build(BuildContext context) {
     listenOnForgetPasswordProvider();
 
-    return Form(
-      key: formKey,
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 19.w),
+    return AuthPageLayout(
+      topSection: Image.asset(AppImages.forgetPasswordLogo),
+      bottomSection: Form(
+        key: formKey,
         child: SingleChildScrollView(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const VerticalGap(45),
-              Text(
-                LocaleKeys.authForgetPasswordResetPassword.tr(),
-                style: AppTextStyles.getTextStyle(24).copyWith(
-                  fontWeight: FontWeight.w700,
-                  color: context.textPalette.primaryColor,
-                ),
+              const VerticalGap(35),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    LocaleKeys.forgetPasswordForgetPassword.tr(),
+                    style: AppTextStyles.getTextStyle(
+                      20,
+                    ).copyWith(color: context.textPalette.primaryColor),
+                  ),
+                ],
               ),
-              const VerticalGap(32),
-              Text(
-                LocaleKeys.authForgetPasswordEnterEmail.tr(),
-                textAlign: TextAlign.center,
-                style: AppTextStyles.getTextStyle(16).copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: context.textPalette.headingColor,
-                ),
-              ),
-              const VerticalGap(10),
-              Text(
-                LocaleKeys.authForgetPasswordCodeWillBeSent.tr(),
-                textAlign: TextAlign.center,
-                style: AppTextStyles.getTextStyle(12).copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: context.textPalette.secondaryColor,
-                ),
-              ),
-              const VerticalGap(89),
-              CustomUnderLineTextField(
+              const VerticalGap(43),
+              LabeledFormField(
+                label: LocaleKeys.forgetPasswordEmail,
+                hint: LocaleKeys.forgetPasswordEmailHint,
                 controller: emailController,
                 validator: Validators.validateEmail,
               ),
-              const VerticalGap(28),
+              const VerticalGap(50),
               CustomButton(
                 onPressed: onSendCodeTap,
                 isDisabled: !isButtonEnabled,
-                text: LocaleKeys.authForgetPasswordSendCode.tr(),
+                text: LocaleKeys.forgetPasswordSendOtp,
               ),
             ],
           ),

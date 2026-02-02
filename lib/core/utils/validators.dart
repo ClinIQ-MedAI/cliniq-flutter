@@ -68,6 +68,34 @@ class Validators {
     return null;
   }
 
+  static String? validateBirthDate(String? value) {
+    if (value == null || value.isEmpty) {
+      return LocaleKeys.validationBirthDateIsRequired.tr();
+    }
+
+    try {
+      final date = DateFormat('dd-MM-yyyy').parseStrict(value);
+      final now = DateTime.now();
+
+      if (date.isAfter(now)) {
+        return LocaleKeys.validationInvalidBirthDate.tr();
+      }
+
+      int age = now.year - date.year;
+      if (now.month < date.month ||
+          (now.month == date.month && now.day < date.day)) {
+        age--;
+      }
+
+      if (age < 14) return LocaleKeys.validationAgeTooYoung.tr();
+      if (age > 120) return LocaleKeys.validationAgeTooOld.tr();
+    } catch (_) {
+      return LocaleKeys.validationInvalidBirthDate.tr();
+    }
+
+    return null;
+  }
+
   static String? validateAge(String? value) {
     if (value == null || value.isEmpty) {
       return LocaleKeys.validationAgeIsRequired.tr();
