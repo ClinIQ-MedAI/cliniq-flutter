@@ -8,6 +8,7 @@ import 'package:cliniq/core/widgets/vertical_gap.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BirthDatePickWidget extends StatefulWidget {
   final ValueChanged<DateTime> onDateSelected;
@@ -26,16 +27,16 @@ class _BirthDatePickWidgetState extends State<BirthDatePickWidget> {
     DateTime tempPickedDate = DateTime(2000);
 
     showModalBottomSheet(
-      backgroundColor: Colors.black,
+      backgroundColor: context.inputTheme.backgroundColor,
       context: context,
       builder: (_) {
         return Center(
           child: Container(
-            height: 250,
-            padding: const EdgeInsets.symmetric(horizontal: 10),
+            height: 350.h,
+            padding: EdgeInsets.symmetric(horizontal: 10.w),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-              color: Colors.black,
+              borderRadius: BorderRadius.circular(25.r),
+              color: context.inputTheme.backgroundColor,
             ),
             child: Column(
               children: [
@@ -43,15 +44,14 @@ class _BirthDatePickWidgetState extends State<BirthDatePickWidget> {
                   child: CupertinoTheme(
                     data: CupertinoThemeData(
                       textTheme: CupertinoTextThemeData(
-                        dateTimePickerTextStyle: TextStyle(
-                          fontSize: 20,
-                          color: context.colorScheme.onPrimary,
-                        ),
+                        dateTimePickerTextStyle: AppTextStyles.getTextStyle(
+                          18,
+                        ).copyWith(color: context.textPalette.primaryColor),
                       ),
                     ),
                     child: CupertinoDatePicker(
                       mode: CupertinoDatePickerMode.date,
-                      backgroundColor: CupertinoColors.black,
+                      backgroundColor: context.inputTheme.backgroundColor,
                       initialDateTime: DateTime(2000),
                       minimumDate: DateTime(1900),
                       maximumDate: DateTime.now(),
@@ -61,6 +61,7 @@ class _BirthDatePickWidgetState extends State<BirthDatePickWidget> {
                     ),
                   ),
                 ),
+                const VerticalGap(32),
                 CustomButton(
                   text: LocaleKeys.signupUserBirthDateButton,
                   onPressed: () {
@@ -77,6 +78,7 @@ class _BirthDatePickWidgetState extends State<BirthDatePickWidget> {
                     Navigator.pop(context);
                   },
                 ),
+                const VerticalGap(32),
               ],
             ),
           ),
