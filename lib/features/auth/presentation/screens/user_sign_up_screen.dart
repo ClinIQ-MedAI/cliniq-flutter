@@ -2,7 +2,6 @@ import 'package:cliniq/core/constants/locale_keys.dart';
 import 'package:cliniq/core/helpers/show_custom_snack_bar.dart';
 import 'package:cliniq/core/utils/app_routes.dart';
 import 'package:cliniq/core/utils/success.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cliniq/core/widgets/custom_modal_progress_hud.dart';
@@ -26,7 +25,7 @@ class UserSignUpScreen extends ConsumerWidget {
           arguments: {'email': ref.watch(signUpProvider).value?.data['email']},
         );
       } else if (next is AsyncError) {
-        showCustomSnackBar(context, next.error.toString().tr());
+        showCustomSnackBar(context, next.error.toString());
       }
     });
     return CustomModalProgressHUD(

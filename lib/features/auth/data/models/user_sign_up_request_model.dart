@@ -8,6 +8,7 @@ class UserSignUpRequestModel extends UserSignUpRequestEntity {
     required super.passwordConfirm,
     required super.phone,
     required super.gender,
+    required super.birthDate,
   });
 
   Map<String, dynamic> toJson() {
@@ -18,6 +19,7 @@ class UserSignUpRequestModel extends UserSignUpRequestEntity {
       'confirmPassword': passwordConfirm,
       'phone': phone,
       'gender': gender.name,
+      'birthDate': birthDate,
     };
   }
 
@@ -29,6 +31,7 @@ class UserSignUpRequestModel extends UserSignUpRequestEntity {
       passwordConfirm: entity.passwordConfirm,
       phone: entity.phone,
       gender: entity.gender,
+      birthDate: entity.birthDate,
     );
   }
 }

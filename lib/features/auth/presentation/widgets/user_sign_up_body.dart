@@ -1,5 +1,6 @@
 import 'package:cliniq/core/enums/gender.dart';
 import 'package:cliniq/core/utils/app_images.dart';
+import 'package:cliniq/core/widgets/birth_date_pick_widget.dart';
 import 'package:cliniq/features/auth/presentation/widgets/auth_page_layout.dart';
 import 'package:cliniq/features/auth/presentation/widgets/auth_switch_widget.dart';
 import 'package:cliniq/features/auth/presentation/widgets/labeled_dropdown_form_field.dart';
@@ -34,6 +35,7 @@ class UserSignUpBodyState extends ConsumerState<UserSignUpBody> {
 
   bool isSignUpButtonEnabled = false;
   Gender? selectedGender;
+  DateTime? birthDate;
 
   @override
   void initState() {
@@ -52,7 +54,8 @@ class UserSignUpBodyState extends ConsumerState<UserSignUpBody> {
         confirmPasswordController.text.isNotEmpty &&
         nameController.text.isNotEmpty &&
         phoneController.text.isNotEmpty &&
-        selectedGender != null;
+        selectedGender != null &&
+        birthDate != null;
     if (isFilled != isSignUpButtonEnabled) {
       setState(() {
         isSignUpButtonEnabled = isFilled;
@@ -70,6 +73,7 @@ class UserSignUpBodyState extends ConsumerState<UserSignUpBody> {
             passwordConfirm: confirmPasswordController.text,
             phone: phoneController.text,
             gender: selectedGender!,
+            birthDate: birthDate!,
           );
 
       final data = UserSignUpRequestModel.fromEntity(
@@ -107,7 +111,7 @@ class UserSignUpBodyState extends ConsumerState<UserSignUpBody> {
               const VerticalGap(24),
               LabeledFormField(
                 controller: nameController,
-                // validator: Validators.validateNormalText,
+                validator: Validators.validateNormalText,
                 label: LocaleKeys.signupUserName,
                 hint: LocaleKeys.signupUserNameHint,
                 keyboardType: TextInputType.name,
@@ -118,8 +122,18 @@ class UserSignUpBodyState extends ConsumerState<UserSignUpBody> {
                 controller: emailController,
                 label: LocaleKeys.signupUserEmail,
                 hint: LocaleKeys.signupUserEmailHint,
-                // validator: Validators.validateEmail,
+                validator: Validators.validateEmail,
               ),
+              const VerticalGap(15),
+              BirthDatePickWidget(
+                onDateSelected: (date) {
+                  setState(() {
+                    birthDate = date;
+                  });
+                  checkFormFilled();
+                },
+              ),
+
               const VerticalGap(15),
               LabeledDropdownFormField(
                 title: LocaleKeys.signupUserGender,
@@ -132,6 +146,7 @@ class UserSignUpBodyState extends ConsumerState<UserSignUpBody> {
                       (e) => e.name == value,
                     );
                   });
+                  checkFormFilled();
                 },
                 selectedValue: selectedGender?.name,
               ),
@@ -140,7 +155,7 @@ class UserSignUpBodyState extends ConsumerState<UserSignUpBody> {
                 controller: phoneController,
                 label: LocaleKeys.signupUserPhone,
                 hint: LocaleKeys.signupUserPhoneHint,
-                // validator: Validators.validatePhoneNumber,
+                validator: Validators.validatePhoneNumber,
               ),
 
               const VerticalGap(15),
@@ -149,7 +164,7 @@ class UserSignUpBodyState extends ConsumerState<UserSignUpBody> {
                 label: LocaleKeys.signupUserPassword,
                 hint: LocaleKeys.signupUserPasswordHint,
                 isPassword: true,
-                // validator: Validators.validatePassword,
+                validator: Validators.validatePassword,
               ),
 
               const VerticalGap(15),
@@ -158,10 +173,10 @@ class UserSignUpBodyState extends ConsumerState<UserSignUpBody> {
                 label: LocaleKeys.signupUserConfirmPassword,
                 hint: LocaleKeys.signupUserConfirmPasswordHint,
                 isPassword: true,
-                // validator: (value) => Validators.confirmPasswordValidator(
-                //   value,
-                //   passwordController.text,
-                // ),
+                validator: (value) => Validators.confirmPasswordValidator(
+                  value,
+                  passwordController.text,
+                ),
               ),
               const VerticalGap(25),
               CustomButton(

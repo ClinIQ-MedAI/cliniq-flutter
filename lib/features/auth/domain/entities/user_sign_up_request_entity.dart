@@ -7,6 +7,7 @@ class UserSignUpRequestEntity {
   final String passwordConfirm;
   final String phone;
   final Gender gender;
+  final DateTime birthDate;
 
   const UserSignUpRequestEntity({
     required this.name,
@@ -15,5 +16,6 @@ class UserSignUpRequestEntity {
     required this.passwordConfirm,
     required this.phone,
     required this.gender,
+    required this.birthDate,
   });
 }
