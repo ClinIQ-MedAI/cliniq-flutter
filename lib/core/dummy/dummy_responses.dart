@@ -1,7 +1,10 @@
 import 'package:cliniq/core/api/end_points.dart';
 
 class DummyResponses {
-  static dynamic getResponse(String path) {
+  static dynamic getResponse(
+    String path, {
+    Map<String, dynamic>? queryParameters,
+  }) {
     switch (path) {
       case EndPoints.login:
         return {
@@ -134,69 +137,164 @@ class DummyResponses {
         };
 
       case EndPoints.examinationAppointments:
-        return {
-          "success": true,
-          "message": "Appointments fetched successfully",
-          "data": [
-            {
-              "id": "1",
-              "doctorName": "Dr. Mohamed Ahmed",
-              "doctorSpeciality": "Cardiology",
-              "doctorImage":
-                  "https://img.freepik.com/free-photo/doctor-with-his-arms-crossed-white-background_1368-5790.jpg",
-              "appointmentDate": "2023-10-25",
-              "appointmentTime": "10:00 AM",
-              "appointmentStatus": "Upcoming",
-            },
-            {
-              "id": "2",
-              "doctorName": "Dr. Ahmed Mohamed",
-              "doctorSpeciality": "Dermatology",
-              "doctorImage":
-                  "https://img.freepik.com/free-photo/portrait-successful-mid-adult-doctor-with-crossed-arms_1262-12865.jpg",
-              "appointmentDate": "2023-10-26",
-              "appointmentTime": "11:00 AM",
-              "appointmentStatus": "Completed",
-            },
-          ],
-        };
-
       case EndPoints.availableDoctors:
+        List<Map<String, dynamic>> selectedDoctors = [];
+        String? requestedDate = queryParameters?['date'];
+
+        // Use a consistent seed based on the date string to make results stable per day
+        int seed = 0;
+        if (requestedDate != null) {
+          // A simple hash of the date string
+          for (int i = 0; i < requestedDate.length; i++) {
+            seed += requestedDate.codeUnits[i];
+          }
+        } else {
+          // Fallback to today's date format
+          DateTime now = DateTime.now();
+          requestedDate =
+              "${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}";
+          for (int i = 0; i < requestedDate.length; i++) {
+            seed += requestedDate.codeUnits[i];
+          }
+        }
+
+        List<Map<String, String>> doctorsPool = [
+          {
+            "name": "Dr. Sarah Johnson",
+            "spec": "Pediatrician",
+            "img":
+                "https://img.freepik.com/free-photo/woman-doctor-wearing-lab-coat-with-stethoscope-isolated_1303-29791.jpg",
+          },
+          {
+            "name": "Dr. Mohamed Ahmed",
+            "spec": "Cardiology",
+            "img":
+                "https://img.freepik.com/free-photo/doctor-with-his-arms-crossed-white-background_1368-5790.jpg",
+          },
+          {
+            "name": "Dr. Emily Davis",
+            "spec": "Dermatology",
+            "img":
+                "https://img.freepik.com/free-photo/portrait-successful-mid-adult-doctor-with-crossed-arms_1262-12865.jpg",
+          },
+          {
+            "name": "Dr. James Wilson",
+            "spec": "Neurology",
+            "img":
+                "https://img.freepik.com/free-photo/smiling-doctor-with-stethoscope-isolated-on-white_651396-974.jpg",
+          },
+          {
+            "name": "Dr. Maria Garcia",
+            "spec": "Dentist",
+            "img":
+                "https://img.freepik.com/free-photo/female-doctor-hospital-with-stethoscope_23-2148827715.jpg",
+          },
+          {
+            "name": "Dr. Robert Chen",
+            "spec": "Orthopedic",
+            "img":
+                "https://img.freepik.com/free-photo/portrait-successful-mid-adult-doctor-with-crossed-arms_1262-12865.jpg",
+          },
+          {
+            "name": "Dr. Sophia Miller",
+            "spec": "Oncology",
+            "img":
+                "https://img.freepik.com/free-photo/doctor-with-his-arms-crossed-white-background_1368-5790.jpg",
+          },
+          {
+            "name": "Dr. William Taylor",
+            "spec": "Urology",
+            "img":
+                "https://img.freepik.com/free-photo/smiling-doctor-with-stethoscope-isolated-on-white_651396-974.jpg",
+          },
+          {
+            "name": "Dr. Olivia Brown",
+            "spec": "ENT Specialist",
+            "img":
+                "https://img.freepik.com/free-photo/woman-doctor-wearing-lab-coat-with-stethoscope-isolated_1303-29791.jpg",
+          },
+          {
+            "name": "Dr. David Martinez",
+            "spec": "Psychiatrist",
+            "img":
+                "https://img.freepik.com/free-photo/doctor-with-his-arms-crossed-white-background_1368-5790.jpg",
+          },
+          {
+            "name": "Dr. Isabella Ross",
+            "spec": "Opthalmologist",
+            "img":
+                "https://img.freepik.com/free-photo/female-doctor-hospital-with-stethoscope_23-2148827715.jpg",
+          },
+          {
+            "name": "Dr. Michael Lee",
+            "spec": "Gastroenterologist",
+            "img":
+                "https://img.freepik.com/free-photo/smiling-doctor-with-stethoscope-isolated-on-white_651396-974.jpg",
+          },
+          {
+            "name": "Dr. Ava Thompson",
+            "spec": "Endocrinologist",
+            "img":
+                "https://img.freepik.com/free-photo/woman-doctor-wearing-lab-coat-with-stethoscope-isolated_1303-29791.jpg",
+          },
+          {
+            "name": "Dr. Lucas Scott",
+            "spec": "Pulmonologist",
+            "img":
+                "https://img.freepik.com/free-photo/doctor-with-his-arms-crossed-white-background_1368-5790.jpg",
+          },
+          {
+            "name": "Dr. Mia White",
+            "spec": "Rheumatologist",
+            "img":
+                "https://img.freepik.com/free-photo/female-doctor-hospital-with-stethoscope_23-2148827715.jpg",
+          },
+          {
+            "name": "Dr. Ethan Green",
+            "spec": "Nephrologist",
+            "img":
+                "https://img.freepik.com/free-photo/smiling-doctor-with-stethoscope-isolated-on-white_651396-974.jpg",
+          },
+          {
+            "name": "Dr. Chloe Hall",
+            "spec": "Gynecologist",
+            "img":
+                "https://img.freepik.com/free-photo/woman-doctor-wearing-lab-coat-with-stethoscope-isolated_1303-29791.jpg",
+          },
+          {
+            "name": "Dr. Mason Hill",
+            "spec": "General Surgeon",
+            "img":
+                "https://img.freepik.com/free-photo/doctor-with-his-arms-crossed-white-background_1368-5790.jpg",
+          },
+        ];
+
+        for (int j = 0; j < 5; j++) {
+          // Use the seed to pick 5 different doctors each day
+          int doctorIndex = (seed + j) % doctorsPool.length;
+          var doc = doctorsPool[doctorIndex];
+
+          // Hours also vary by seed
+          int hour = 9 + (seed % 3) + j;
+
+          selectedDoctors.add({
+            "id": "${seed}_${j}",
+            "doctorName": doc["name"],
+            "doctorSpeciality": doc["spec"],
+            "doctorImage": doc["img"],
+            "appointmentDate": requestedDate,
+            "appointmentTime":
+                "${hour % 12 == 0 ? 12 : hour % 12}:00 ${hour >= 12 ? 'PM' : 'AM'}",
+            "appointmentStatus": path == EndPoints.availableDoctors
+                ? "Available"
+                : "Upcoming",
+          });
+        }
+
         return {
           "success": true,
-          "message": "Available doctors fetched successfully",
-          "data": [
-            {
-              "id": "1",
-              "doctorName": "Dr. Sarah Johnson",
-              "doctorSpeciality": "Pediatrician",
-              "doctorImage":
-                  "https://img.freepik.com/free-photo/woman-doctor-wearing-lab-coat-with-stethoscope-isolated_1303-29791.jpg",
-              "appointmentDate": "2023-10-25",
-              "appointmentTime": "10:30 AM",
-              "appointmentStatus": "Available",
-            },
-            {
-              "id": "2",
-              "doctorName": "Dr. Mohamed Ahmed",
-              "doctorSpeciality": "Cardiology",
-              "doctorImage":
-                  "https://img.freepik.com/free-photo/doctor-with-his-arms-crossed-white-background_1368-5790.jpg",
-              "appointmentDate": "2023-10-25",
-              "appointmentTime": "11:00 AM",
-              "appointmentStatus": "Available",
-            },
-            {
-              "id": "3",
-              "doctorName": "Dr. Emily Davis",
-              "doctorSpeciality": "Dermatology",
-              "doctorImage":
-                  "https://img.freepik.com/free-photo/portrait-successful-mid-adult-doctor-with-crossed-arms_1262-12865.jpg",
-              "appointmentDate": "2023-10-25",
-              "appointmentTime": "11:30 AM",
-              "appointmentStatus": "Available",
-            },
-          ],
+          "message": "Data fetched successfully",
+          "data": selectedDoctors,
         };
 
       default:

@@ -12,7 +12,7 @@ class DummyApiConsumer extends ApiConsumer {
     Map<String, dynamic>? queryParameters,
   }) async {
     await Future.delayed(const Duration(seconds: 1));
-    return DummyResponses.getResponse(path);
+    return DummyResponses.getResponse(path, queryParameters: queryParameters);
   }
 
   @override

@@ -1,4 +1,3 @@
-import 'package:cliniq/features/appointments/domain/repos/appointments_repo.dart';
 import 'package:cliniq/features/appointments/presentation/providers/appointments_repo_provider.dart';
 import 'package:cliniq/features/home/domain/entities/examination_appointment_entity.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
