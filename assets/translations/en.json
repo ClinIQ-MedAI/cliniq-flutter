@@ -153,5 +153,15 @@
             "terms_and_services": "Terms and Services",
             "logout": "Logout"
         }
+    },
+    "booking": {
+        "title": "Booking schedule",
+        "available_doctors": "Available Doctors",
+        "booking": "Booking",
+        "about": "about",
+        "working_hours": "working hours",
+        "patient": "patient",
+        "full": "full",
+        "booking_button": "Booking"
     }
 }
