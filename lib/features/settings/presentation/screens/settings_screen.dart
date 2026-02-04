@@ -3,8 +3,12 @@ import 'package:cliniq/core/utils/app_routes.dart';
 import 'package:cliniq/core/utils/app_text_styles.dart';
 import 'package:cliniq/core/utils/app_theme_extension.dart';
 import 'package:cliniq/core/widgets/vertical_gap.dart';
+import 'package:cliniq/core/cubits/app_theme_cubit/app_theme_cubit.dart';
+import 'package:cliniq/core/cubits/app_theme_cubit/app_theme_state.dart';
+import 'package:cliniq/core/enums/app_theme_mode.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -24,9 +28,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
       appBar: AppBar(
         title: Text(
           LocaleKeys.settingsUserTitle.tr(),
-          style: AppTextStyles.getTextStyle(20, fontFamily: 'Poppins').copyWith(
+          style: AppTextStyles.getTextStyle(20).copyWith(
             fontWeight: FontWeight.w700,
-            color: context.colorScheme.onBackground,
+            color: context.textPalette.primaryColor,
           ),
         ),
         centerTitle: true,
@@ -61,6 +65,36 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     setState(() => _emailNotifications = val);
                   },
                 ),
+              ],
+            ),
+            const VerticalGap(20),
+            Text(
+              'General',
+              style: AppTextStyles.getTextStyle(18).copyWith(
+                fontWeight: FontWeight.w600,
+                color: context.colorScheme.onSurface.withOpacity(0.7),
+              ),
+            ),
+            const VerticalGap(12),
+            _buildSection(
+              context,
+              children: [
+                BlocBuilder<AppThemeCubit, AppThemeState>(
+                  builder: (context, state) {
+                    final themeCubit = context.read<AppThemeCubit>();
+                    return _buildSwitchTile(
+                      LocaleKeys.settingsUserDarkMode.tr(),
+                      themeCubit.currentTheme == AppThemeMode.dark,
+                      (val) {
+                        themeCubit.changeTheme(
+                          val ? AppThemeMode.dark : AppThemeMode.light,
+                        );
+                      },
+                    );
+                  },
+                ),
+                _buildDivider(),
+                _buildLanguageTile(context),
               ],
             ),
             const VerticalGap(20),
@@ -193,6 +227,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     required VoidCallback onTap,
     Color? textColor,
     Color? iconColor,
+    Widget? trailing,
   }) {
     return ListTile(
       leading: Icon(icon, color: iconColor ?? context.colorScheme.secondary),
@@ -203,16 +238,65 @@ class _SettingsScreenState extends State<SettingsScreen> {
           color: textColor ?? context.colorScheme.onBackground,
         ),
       ),
-      trailing: const Icon(
-        Icons.arrow_forward_ios,
-        size: 16,
-        color: Colors.grey,
-      ),
+      trailing:
+          trailing ??
+          const Icon(Icons.arrow_forward_ios, size: 16, color: Colors.grey),
       onTap: onTap,
     );
   }
 
   Widget _buildDivider() {
     return const Divider(height: 1, indent: 20, endIndent: 20);
+  }
+
+  Widget _buildLanguageTile(BuildContext context) {
+    return _buildActionTile(
+      context,
+      LocaleKeys.settingsUserLanguage.tr(),
+      Icons.language_outlined,
+      trailing: Text(
+        context.locale.languageCode == 'en'
+            ? LocaleKeys.settingsUserEnglish.tr()
+            : LocaleKeys.settingsUserArabic.tr(),
+        style: AppTextStyles.getTextStyle(14).copyWith(color: Colors.grey),
+      ),
+      onTap: () {
+        _showLanguageSelectionDialog(context);
+      },
+    );
+  }
+
+  void _showLanguageSelectionDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(LocaleKeys.settingsUserLanguage.tr()),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ListTile(
+              title: Text(LocaleKeys.settingsUserEnglish.tr()),
+              trailing: context.locale.languageCode == 'en'
+                  ? Icon(Icons.check, color: Theme.of(context).primaryColor)
+                  : null,
+              onTap: () {
+                context.setLocale(const Locale('en'));
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text(LocaleKeys.settingsUserArabic.tr()),
+              trailing: context.locale.languageCode == 'ar'
+                  ? Icon(Icons.check, color: Theme.of(context).primaryColor)
+                  : null,
+              onTap: () {
+                context.setLocale(const Locale('ar'));
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

@@ -151,7 +151,11 @@
             "two_factor_auth": "Two-Factor Auth",
             "privacy_policy": "Privacy Policy",
             "terms_and_services": "Terms and Services",
-            "logout": "Logout"
+            "logout": "Logout",
+            "dark_mode": "Dark Mode",
+            "language": "Language",
+            "english": "English",
+            "arabic": "Arabic"
         }
     },
     "booking": {

@@ -177,6 +177,10 @@ abstract class LocaleKeys {
   static const settingsUserTermsAndServices =
       "settings.user.terms_and_services";
   static const settingsUserLogout = "settings.user.logout";
+  static const settingsUserDarkMode = "settings.user.dark_mode";
+  static const settingsUserLanguage = "settings.user.language";
+  static const settingsUserEnglish = "settings.user.english";
+  static const settingsUserArabic = "settings.user.arabic";
 
   // booking
   static const String bookingTitle = "booking.title";

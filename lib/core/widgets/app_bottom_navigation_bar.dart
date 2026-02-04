@@ -43,6 +43,7 @@ class AppBottomNavigationBar extends StatelessWidget {
             return CurvedNavigationBarItem(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SvgPicture.asset(item.icon),
                   Text(

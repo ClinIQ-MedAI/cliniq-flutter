@@ -1,0 +1,171 @@
+{
+    "messages": {
+        "success": {
+            "verification_code_sent": "تم إرسال رمز التحقق إلى بريدك الإلكتروني.",
+            "new_verification_code_sent": "تم إرسال رمز تحقق جديد إلى بريدك الإلكتروني.",
+            "account_created_successfully": "تم إنشاء الحساب بنجاح",
+            "account_verified_successfully": "تم التحقق من حسابك بنجاح"
+        },
+        "failures": {
+            "incorrect_credentials": "البريد الإلكتروني أو كلمة المرور غير صحيحة. يرجى المحاولة مرة أخرى.",
+            "inactive_user": "تم إرسال رابط تحقق جديد إلى بريدك الإلكتروني ، يرجى الذهاب والتحقق من بريدك الإلكتروني",
+            "unexpected_error": "حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى لاحقًا.",
+            "national_id_already_exists": "الرقم القومي موجود بالفعل.",
+            "account_already_exists": "هناك حساب بهذا البريد الإلكتروني موجود بالفعل.",
+            "username_already_exists": "اسم المستخدم هذا مرتبط بالفعل بحساب موجود.",
+            "invalid_or_expired_code": "الرمز الذي أدخلته غير صالح أو منتهي الصلاحية. يرجى المحاولة مرة أخرى.",
+            "invalid_email": "لم نتمكن من العثور على حساب بهذا البريد الإلكتروني.",
+            "user_already_active": "حسابك نشط بالفعل. لا يلزم اتخاذ أي إجراء آخر.",
+            "verification_code_not_found": "رمز التحقق غير موجود. يرجى طلب رمز جديد.",
+            "reset_token_expired": "انتهت صلاحية رمز إعادة التعيين. يرجى طلب رمز جديد.",
+            "invalid_verification_code": "رمز التحقق غير صالح. يرجى المحاولة مرة أخرى."
+        }
+    },
+    "validation": {
+        "field_is_required": "الحقل مطلوب",
+        "email_is_required": "البريد الإلكتروني مطلوب",
+        "invalid_email": "يرجى إدخال عنوان بريد إلكتروني صالح",
+        "password_is_required": "كلمة المرور مطلوبة",
+        "password_too_short": "يجب أن تتكون كلمة المرور من 8 أحرف على الأقل",
+        "phone_is_required": "رقم الهاتف مطلوب",
+        "invalid_phone": "يرجى إدخال رقم هاتف صالح",
+        "age_is_required": "العمر مطلوب",
+        "invalid_age": "يرجى إدخال عمر صالح",
+        "age_too_young": "يجب أن يكون العمر 14 عامًا أو أكثر",
+        "age_too_old": "يرجى إدخال عمر واقعي",
+        "confirm_password_is_required": "تأكيد كلمة المرور مطلوب.",
+        "passwords_do_not_match": "كلمات المرور غير متطابقة.",
+        "password_must_contain_6_chars": "يجب أن تحتوي كلمة المرور على 6 أحرف على الأقل",
+        "password_must_contain_lowercase": "يجب أن تحتوي كلمة المرور على حرف صغير واحد على الأقل.",
+        "password_must_contain_uppercase": "يجب أن تحتوي كلمة المرور على حرف كبير واحد على الأقل.",
+        "enter_your_email_to_reset_password": "يرجى إدخال بريدك الإلكتروني لإعادة تعيين كلمة المرور",
+        "governorate_is_required": "المحافظة مطلوبة",
+        "governorate_too_long": "يجب أن تكون المحافظة 30 حرفًا على الأكثر",
+        "invalid_national_id": "يجب أن يتكون الرقم القومي من 14 رقمًا",
+        "password_must_contain_number": "يجب أن تحتوي كلمة المرور على رقم واحد على الأقل.",
+        "birth_date_is_required": "يرجى تحديد تاريخ ميلادك",
+        "invalid_birth_date": "تاريخ ميلاد غير صالح"
+    },
+    "bottom_navigation_bar": {
+        "ai_chat": "دردشه الذكاء الاصطناعي"
+    },
+    "onboarding": {
+        "title_1": "صحتك ، أولويتنا",
+        "description_1": "احصل على رعاية طبية متعددة التخصصات مع أطباء موثوق بهم ، كل ذلك في مكان واحد",
+        "title_2": "رعاية خبراء في جميع الأقسام",
+        "description_2": "من أمراض القلب إلى جراحة العظام والأعصاب وطب الأطفال وأكثر - ابحث عن المتخصص المناسب في أي وقت.",
+        "title_3": "تقنية DMRI لطب الأعصاب",
+        "description_3": "الكشف المبكر والدقيق عن الاضطرابات العصبية باستخدام التصوير بالرنين المغناطيسي لانتشار السوائل المتقدم"
+    },
+    "auth_login": {
+        "email_hint": "البريد الإلكتروني",
+        "password_hint": "كلمة المرور",
+        "forgot_password": "هل نسيت كلمة المرور؟",
+        "create_new_account": "إنشاء حساب جديد",
+        "login_button": "تسجيل الدخول",
+        "sign_up": "إنشاء حساب",
+        "dont_have_an_account": "ليس لديك حساب؟"
+    },
+    "forget_password": {
+        "forget_password": "نسيت كلمة المرور",
+        "email": "معرف البريد الإلكتروني",
+        "email_hint": "أدخل معرف البريد الإلكتروني",
+        "send_otp": "إرسال الرمز"
+    },
+    "verify_otp": {
+        "enter_code": "أدخل رمز التحقق المكون من 6 أرقام",
+        "code_sent": "لقد أرسلنا رمز تحقق إلى بريدك الإلكتروني",
+        "resend_code": "إعادة إرسال الرمز",
+        "didnt_receive_code": "لم تستلم الرمز؟",
+        "verify_otp": "التحقق من الرمز"
+    },
+    "reset_password": {
+        "set_new_password": "تعيين كلمة مرور جديدة",
+        "password_hint": "كلمة المرور",
+        "confirm_password_hint": "تأكيد كلمة المرور",
+        "reset": "إعادة تعيين"
+    },
+    "signup": {
+        "user": {
+            "name": "الاسم",
+            "name_hint": "أدخل الاسم",
+            "email": "البريد الإلكتروني",
+            "email_hint": "أدخل البريد الإلكتروني",
+            "password": "كلمة المرور",
+            "password_hint": "أدخل كلمة المرور",
+            "confirm_password": "تأكيد كلمة المرور",
+            "confirm_password_hint": "أدخل تأكيد كلمة المرور",
+            "gender": "الجنس",
+            "gender_hint": "اختر الجنس",
+            "phone": "الهاتف",
+            "phone_hint": "أدخل رقم هاتفك",
+            "already_have_account": "هل لديك حساب بالفعل؟",
+            "login_button": "تسجيل الدخول",
+            "submit_button": "إرسال",
+            "birth_date": "تاريخ الميلاد",
+            "birth_date_hint": "يوم شهر سنة",
+            "birth_date_button": "اختر التاريخ",
+            "authenticate_fingerprint": "قم بمصادقة بصمة إصبعك لتسجيل الدخول"
+        }
+    },
+    "verify_email": {
+        "enter_code": "أدخل رمز التحقق المكون من 6 أرقام",
+        "code_sent": "لقد أرسلنا رمز تحقق إلى بريدك الإلكتروني",
+        "resend_code": "إعادة إرسال الرمز",
+        "didnt_receive_code": "لم تستلم الرمز؟",
+        "verify_otp": "التحقق من الرمز"
+    },
+    "home": {
+        "welcome_back": "مرحباً بعودتك",
+        "search_hint": "ابحث عن الأطباء والتخصصات",
+        "examination_appointments": "مواعيد الكشف",
+        "specialization": "التخصص",
+        "suggested_doctor": "طبيب مقترح",
+        "new_news": "أخبار جديدة",
+        "see_all": "عرض الكل"
+    },
+    "profile": {
+        "user": {
+            "title": "الملف الشخصي",
+            "blood_group": "فصيلة الدم",
+            "email": "البريد الإلكتروني",
+            "mobile": "الهاتف المحمول",
+            "height": "الطول",
+            "weight": "الوزن",
+            "ailments": "الأمراض",
+            "edit_profile": "تعديل الملف الشخصي",
+            "full_name": "الاسم الكامل",
+            "save": "حفظ"
+        }
+    },
+    "settings": {
+        "user": {
+            "title": "الإعدادات",
+            "push_notifications": "إشعارات التطبيق",
+            "sms_notifications": "إشعارات SMS",
+            "email_notifications": "إشعارات البريد الإلكتروني",
+            "change_password": "تغيير كلمة المرور",
+            "my_location": "موقعي",
+            "change_number": "تغيير الرقم",
+            "change_email": "تغيير البريد الإلكتروني",
+            "two_factor_auth": "المصادقة الثنائية",
+            "privacy_policy": "سياسة الخصوصية",
+            "terms_and_services": "الشروط والخدمات",
+            "logout": "تسجيل الخروج",
+            "dark_mode": "الوضع الداكن",
+            "language": "اللغة",
+            "english": "الإنجليزية",
+            "arabic": "العربية"
+        }
+    },
+    "booking": {
+        "title": "جدول الحجز",
+        "available_doctors": "الأطباء المتاحون",
+        "booking": "حجز",
+        "about": "عن الطبيب",
+        "working_hours": "ساعات العمل",
+        "patient": "مريض",
+        "full": "مكتمل",
+        "booking_button": "حجز"
+    }
+}
