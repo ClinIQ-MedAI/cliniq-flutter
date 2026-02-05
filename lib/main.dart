@@ -85,11 +85,11 @@ class _ClinIqState extends State<ClinIq> {
                 onGenerateRoute: (settings) =>
                     onGenerateRoutes(settings, context),
                 home: getInitialRoute(),
-                builder: kDebugMode
-                    ? (context, child) {
-                        return DeveloperOverlay(child: child!);
-                      }
-                    : null,
+                // builder: kDebugMode
+                //     ? (context, child) {
+                //         return DeveloperOverlay(child: child!);
+                //       }
+                //     : null,
               );
             },
           );

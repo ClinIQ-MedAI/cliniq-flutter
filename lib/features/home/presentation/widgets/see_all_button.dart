@@ -16,7 +16,8 @@ class SeeAllButton extends StatelessWidget {
       child: Text(
         LocaleKeys.homeSeeAll.tr(),
         style: AppTextStyles.getTextStyle(12).copyWith(
-          color: context.colorScheme.secondary,
+          color: context.colorScheme.primary,
+          fontWeight: FontWeight.w600,
         ),
       ),
     );

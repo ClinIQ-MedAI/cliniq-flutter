@@ -21,15 +21,16 @@ class HomeSpecializationsWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 LocaleKeys.homeSpecialization.tr(),
-                style: AppTextStyles.getTextStyle(16).copyWith(
-                  fontWeight: FontWeight.w700,
+                style: AppTextStyles.getTextStyle(20).copyWith(
+                  fontWeight: FontWeight.w800,
                   color: context.textPalette.primaryColor,
+                  letterSpacing: -0.5,
                 ),
               ),
               SeeAllButton(onPressed: () {}),
@@ -38,45 +39,53 @@ class HomeSpecializationsWidget extends StatelessWidget {
         ),
         const VerticalGap(16),
         SizedBox(
-          height: 100.h,
+          height: 120.h,
           child: ListView.separated(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 24),
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
               final specialization = specializations[index];
               return Column(
                 children: [
                   Container(
-                    width: 60.w,
-                    height: 60.w,
-                    padding: const EdgeInsets.all(12),
+                    width: 75.w,
+                    height: 75.w,
+                    padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
                       color: context.colorScheme.surface,
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(20.r),
                       boxShadow: [
                         BoxShadow(
                           color: context.colorScheme.shadow.withValues(
-                            alpha: 0.05,
+                            alpha: 0.08,
                           ),
-                          blurRadius: 10,
-                          offset: const Offset(0, 4),
+                          blurRadius: 15,
+                          offset: const Offset(0, 6),
                         ),
                       ],
+                      border: Border.all(
+                        color: context.colorScheme.primary.withValues(
+                          alpha: 0.05,
+                        ),
+                      ),
                     ),
                     child: CachedNetworkImage(
                       imageUrl: specialization.image,
                       fit: BoxFit.contain,
-                      placeholder: (context, url) =>
-                          const Center(child: CircularProgressIndicator()),
-                      errorWidget: (context, url, error) =>
-                          const Icon(Icons.error),
+                      placeholder: (context, url) => const Center(
+                        child: CircularProgressIndicator(strokeWidth: 2),
+                      ),
+                      errorWidget: (context, url, error) => const Icon(
+                        Icons.category_rounded,
+                        color: Colors.grey,
+                      ),
                     ),
                   ),
-                  const VerticalGap(8),
+                  const VerticalGap(10),
                   Text(
                     specialization.name.tr(),
-                    style: AppTextStyles.getTextStyle(12).copyWith(
-                      fontWeight: FontWeight.w500,
+                    style: AppTextStyles.getTextStyle(14).copyWith(
+                      fontWeight: FontWeight.w600,
                       color: context.textPalette.primaryColor,
                     ),
                     maxLines: 1,
@@ -85,7 +94,7 @@ class HomeSpecializationsWidget extends StatelessWidget {
                 ],
               );
             },
-            separatorBuilder: (context, index) => const HorizontalGap(16),
+            separatorBuilder: (context, index) => const HorizontalGap(20),
             itemCount: specializations.length,
           ),
         ),

@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cliniq/core/constants/locale_keys.dart';
 import 'package:cliniq/core/utils/app_text_styles.dart';
 import 'package:cliniq/core/utils/app_theme_extension.dart';
+import 'package:cliniq/core/widgets/horizontal_gap.dart';
 import 'package:cliniq/core/widgets/vertical_gap.dart';
 import 'package:cliniq/features/home/domain/entities/news_entity.dart';
 import 'package:cliniq/features/home/presentation/widgets/see_all_button.dart';
@@ -19,15 +20,16 @@ class HomeNewsWidget extends StatelessWidget {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 LocaleKeys.homeNewNews.tr(),
-                style: AppTextStyles.getTextStyle(16).copyWith(
-                  fontWeight: FontWeight.w700,
+                style: AppTextStyles.getTextStyle(20).copyWith(
+                  fontWeight: FontWeight.w800,
                   color: context.textPalette.primaryColor,
+                  letterSpacing: -0.5,
                 ),
               ),
               SeeAllButton(onPressed: () {}),
@@ -36,26 +38,29 @@ class HomeNewsWidget extends StatelessWidget {
         ),
         const VerticalGap(16),
         SizedBox(
-          height: 200.h,
+          height: 260.h,
           child: ListView.separated(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
             scrollDirection: Axis.horizontal,
             itemCount: news.length,
-            separatorBuilder: (context, index) => SizedBox(width: 16.w),
+            separatorBuilder: (context, index) => const HorizontalGap(16),
             itemBuilder: (context, index) {
               final item = news[index];
               return Container(
-                width: 240.w,
+                width: 260.w,
                 decoration: BoxDecoration(
                   color: context.colorScheme.surface,
-                  borderRadius: BorderRadius.circular(16),
+                  borderRadius: BorderRadius.circular(24.r),
                   boxShadow: [
                     BoxShadow(
-                      color: context.colorScheme.shadow.withValues(alpha: 0.05),
-                      blurRadius: 10,
-                      offset: const Offset(0, 4),
+                      color: context.colorScheme.shadow.withValues(alpha: 0.08),
+                      blurRadius: 15,
+                      offset: const Offset(0, 8),
                     ),
                   ],
+                  border: Border.all(
+                    color: context.colorScheme.primary.withValues(alpha: 0.05),
+                  ),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -63,25 +68,27 @@ class HomeNewsWidget extends StatelessWidget {
                     Expanded(
                       flex: 3,
                       child: ClipRRect(
-                        borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(16),
-                          topRight: Radius.circular(16),
+                        borderRadius: BorderRadius.vertical(
+                          top: Radius.circular(24.r),
                         ),
                         child: CachedNetworkImage(
                           imageUrl: item.image,
                           fit: BoxFit.cover,
                           width: double.infinity,
-                          placeholder: (context, url) =>
-                              const Center(child: CircularProgressIndicator()),
-                          errorWidget: (context, url, error) =>
-                              const Icon(Icons.error),
+                          placeholder: (context, url) => const Center(
+                            child: CircularProgressIndicator(strokeWidth: 2),
+                          ),
+                          errorWidget: (context, url, error) => const Icon(
+                            Icons.image_not_supported_rounded,
+                            color: Colors.grey,
+                          ),
                         ),
                       ),
                     ),
                     Expanded(
                       flex: 2,
                       child: Padding(
-                        padding: const EdgeInsets.all(12),
+                        padding: const EdgeInsets.all(16),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -89,19 +96,20 @@ class HomeNewsWidget extends StatelessWidget {
                               item.title,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
-                              style: AppTextStyles.getTextStyle(14).copyWith(
-                                fontWeight: FontWeight.w600,
+                              style: AppTextStyles.getTextStyle(16).copyWith(
+                                fontWeight: FontWeight.w700,
                                 color: context.textPalette.primaryColor,
                               ),
                             ),
-                            const VerticalGap(4),
+                            const VerticalGap(6),
                             Expanded(
                               child: Text(
                                 item.description,
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
-                                style: AppTextStyles.getTextStyle(12).copyWith(
+                                style: AppTextStyles.getTextStyle(14).copyWith(
                                   color: context.textPalette.secondaryColor,
+                                  height: 1.3,
                                 ),
                               ),
                             ),

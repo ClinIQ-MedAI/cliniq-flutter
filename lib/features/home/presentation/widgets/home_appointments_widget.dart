@@ -8,39 +8,66 @@ import 'package:cliniq/features/home/domain/entities/examination_appointment_ent
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class HomeAppointmentsWidget extends StatelessWidget {
+class HomeAppointmentsWidget extends StatefulWidget {
   const HomeAppointmentsWidget({super.key, required this.appointments});
 
   final List<ExaminationAppointmentEntity> appointments;
 
   @override
+  State<HomeAppointmentsWidget> createState() => _HomeAppointmentsWidgetState();
+}
+
+class _HomeAppointmentsWidgetState extends State<HomeAppointmentsWidget> {
+  late PageController _pageController;
+  double _currentPage = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController(viewportFraction: 1.0);
+    _pageController.addListener(() {
+      setState(() {
+        _currentPage = _pageController.page ?? 0;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    if (appointments.isEmpty) return const SizedBox.shrink();
+    if (widget.appointments.isEmpty) return const SizedBox.shrink();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 LocaleKeys.homeExaminationAppointments.tr(),
-                style: AppTextStyles.getTextStyle(18).copyWith(
-                  fontWeight: FontWeight.w700,
+                style: AppTextStyles.getTextStyle(22).copyWith(
+                  fontWeight: FontWeight.w800,
                   color: context.textPalette.primaryColor,
+                  letterSpacing: -0.5,
                 ),
               ),
               Container(
-                padding: const EdgeInsets.all(8),
+                padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   color: context.colorScheme.primary.withValues(alpha: 0.1),
-                  shape: BoxShape.circle,
+                  borderRadius: BorderRadius.circular(12.r),
                 ),
                 child: Icon(
-                  Icons.calendar_month_rounded,
+                  Icons.calendar_today_rounded,
                   color: context.colorScheme.primary,
                   size: 20,
                 ),
@@ -48,129 +75,197 @@ class HomeAppointmentsWidget extends StatelessWidget {
             ],
           ),
         ),
-        const VerticalGap(16),
+        const VerticalGap(20),
         SizedBox(
-          height: 140.h,
+          height: 190.h,
           child: PageView.builder(
-            controller: PageController(viewportFraction: 0.9),
-            itemCount: appointments.length,
-            padEnds: false,
+            controller: _pageController,
+            itemCount: widget.appointments.length,
+            clipBehavior: Clip.none,
             itemBuilder: (context, index) {
-              final appointment = appointments[index];
-              return Container(
-                margin: const EdgeInsets.only(right: 16),
-                padding: const EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      context.colorScheme.primary,
-                      context.colorScheme.primary.withValues(alpha: 0.8),
-                    ],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
-                  borderRadius: BorderRadius.circular(24),
-                  boxShadow: [
-                    BoxShadow(
-                      color: context.colorScheme.primary.withValues(
-                        alpha: 0.25,
+              final appointment = widget.appointments[index];
+              final delta = index - _currentPage;
+
+              // Stacked card animation logic
+              final double scale = (1 - (delta.abs() * 0.1)).clamp(0.8, 1.0);
+              final double opacity = (1 - (delta.abs() * 0.5)).clamp(0.0, 1.0);
+              final double translation = delta * 60.0;
+
+              return Opacity(
+                opacity: opacity,
+                child: Transform(
+                  transform: Matrix4.identity()
+                    ..translate(translation)
+                    ..scale(scale),
+                  alignment: Alignment.center,
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 24),
+                    padding: const EdgeInsets.all(24),
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          context.colorScheme.primary,
+                          context.colorScheme.primaryContainer,
+                        ],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
                       ),
-                      blurRadius: 20,
-                      offset: const Offset(0, 8),
-                    ),
-                  ],
-                ),
-                child: Row(
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(color: Colors.white, width: 2),
-                      ),
-                      child: ClipOval(
-                        child: CachedNetworkImage(
-                          imageUrl: appointment.doctorImage,
-                          width: 64.w,
-                          height: 64.w,
-                          fit: BoxFit.cover,
-                          placeholder: (context, url) => Container(
-                            color: Colors.white24,
-                            child: const Center(
-                              child: CircularProgressIndicator(
-                                color: Colors.white,
-                              ),
-                            ),
+                      borderRadius: BorderRadius.circular(32.r),
+                      boxShadow: [
+                        BoxShadow(
+                          color: context.colorScheme.primary.withValues(
+                            alpha: 0.3,
                           ),
-                          errorWidget: (context, url, error) =>
-                              const Icon(Icons.person, color: Colors.white),
+                          blurRadius: 30,
+                          offset: const Offset(0, 15),
+                          spreadRadius: -10,
                         ),
-                      ),
+                      ],
                     ),
-                    SizedBox(width: 20.w),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            appointment.doctorName,
-                            style: AppTextStyles.getTextStyle(16).copyWith(
-                              fontWeight: FontWeight.w700,
-                              color: context.colorScheme.onPrimary,
-                            ),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          const VerticalGap(4),
-                          Text(
-                            appointment.doctorSpeciality,
-                            style: AppTextStyles.getTextStyle(13).copyWith(
-                              color: context.colorScheme.onPrimary.withValues(
-                                alpha: 0.9,
-                              ),
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                          const VerticalGap(12),
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 10,
-                              vertical: 6,
-                            ),
-                            decoration: BoxDecoration(
-                              color: context.textPalette.primaryColor
-                                  .withValues(alpha: 0.15),
-                              borderRadius: BorderRadius.circular(12.r),
-                            ),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Icon(
-                                  Icons.access_time_rounded,
-                                  color: context.colorScheme.onPrimary,
-                                  size: 14,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 10,
+                                  vertical: 4,
                                 ),
-                                const HorizontalGap(6),
-                                Text(
-                                  '${appointment.appointmentDate} • ${appointment.appointmentTime}',
-                                  style: AppTextStyles.getTextStyle(12)
+                                decoration: BoxDecoration(
+                                  color: Colors.white.withValues(alpha: 0.15),
+                                  borderRadius: BorderRadius.circular(8.r),
+                                ),
+                                child: Text(
+                                  'UPCOMING',
+                                  style: AppTextStyles.getTextStyle(10)
                                       .copyWith(
-                                        color: context.colorScheme.onPrimary,
-                                        fontWeight: FontWeight.w600,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w900,
+                                        letterSpacing: 1.2,
                                       ),
                                 ),
-                              ],
+                              ),
+                              const VerticalGap(12),
+                              Text(
+                                appointment.doctorName,
+                                style: AppTextStyles.getTextStyle(20).copyWith(
+                                  fontWeight: FontWeight.w800,
+                                  color: context.colorScheme.onPrimary,
+                                  letterSpacing: 0.2,
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              const VerticalGap(4),
+                              Text(
+                                appointment.doctorSpeciality,
+                                style: AppTextStyles.getTextStyle(15).copyWith(
+                                  color: context.colorScheme.onPrimary
+                                      .withValues(alpha: 0.85),
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              const VerticalGap(16),
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 12,
+                                  vertical: 8,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: Colors.white.withValues(alpha: 0.1),
+                                  borderRadius: BorderRadius.circular(12.r),
+                                ),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Icon(
+                                      Icons.access_time_filled_rounded,
+                                      color: context.colorScheme.onPrimary,
+                                      size: 16,
+                                    ),
+                                    const HorizontalGap(8),
+                                    Text(
+                                      '${appointment.appointmentDate} • ${appointment.appointmentTime}',
+                                      style: AppTextStyles.getTextStyle(13)
+                                          .copyWith(
+                                            color:
+                                                context.colorScheme.onPrimary,
+                                            fontWeight: FontWeight.w700,
+                                          ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const HorizontalGap(16),
+                        // Prominent Doctor Photo
+                        Container(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: Colors.white.withValues(alpha: 0.2),
+                              width: 4,
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withValues(alpha: 0.3),
+                                blurRadius: 20,
+                              ),
+                            ],
+                          ),
+                          child: ClipOval(
+                            child: CachedNetworkImage(
+                              imageUrl: appointment.doctorImage,
+                              width: 90.w,
+                              height: 90.w,
+                              fit: BoxFit.cover,
+                              placeholder: (context, url) => Container(
+                                color: Colors.white10,
+                                child: const Center(
+                                  child: CircularProgressIndicator(
+                                    color: Colors.white,
+                                    strokeWidth: 2,
+                                  ),
+                                ),
+                              ),
+                              errorWidget: (context, url, error) => const Icon(
+                                Icons.person,
+                                color: Colors.white,
+                                size: 40,
+                              ),
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
               );
             },
           ),
         ),
+        if (widget.appointments.length > 1) ...[
+          const VerticalGap(20),
+          Center(
+            child: SmoothPageIndicator(
+              controller: _pageController,
+              count: widget.appointments.length,
+              effect: ExpandingDotsEffect(
+                dotHeight: 8.h,
+                dotWidth: 8.h,
+                activeDotColor: context.colorScheme.primary,
+                dotColor: context.colorScheme.primary.withValues(alpha: 0.2),
+                expansionFactor: 4,
+                spacing: 8.w,
+              ),
+            ),
+          ),
+        ],
       ],
     );
   }
