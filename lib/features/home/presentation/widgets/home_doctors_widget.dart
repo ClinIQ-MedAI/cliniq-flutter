@@ -1,15 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cliniq/core/constants/locale_keys.dart';
 import 'package:cliniq/core/utils/app_text_styles.dart';
 import 'package:cliniq/core/utils/app_theme_extension.dart';
 import 'package:cliniq/core/widgets/vertical_gap.dart';
 import 'package:cliniq/features/appointments/presentation/screens/booking_screen.dart';
 import 'package:cliniq/features/home/domain/entities/doctor_entity.dart';
 import 'package:cliniq/features/home/domain/entities/examination_appointment_entity.dart';
+import 'package:cliniq/features/home/presentation/widgets/see_all_button.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:intl/intl.dart';
 
 class HomeDoctorsWidget extends StatelessWidget {
   const HomeDoctorsWidget({super.key, required this.doctors});
@@ -32,15 +31,8 @@ class HomeDoctorsWidget extends StatelessWidget {
                   color: context.textPalette.primaryColor,
                 ),
               ),
-              TextButton(
+              SeeAllButton(
                 onPressed: () {},
-                child: Text(
-                  LocaleKeys.homeSeeAll.tr(),
-                  style: AppTextStyles.getTextStyle(12).copyWith(
-                    fontWeight: FontWeight.w400,
-                    color: context.colorScheme.secondary,
-                  ),
-                ),
               ),
             ],
           ),
