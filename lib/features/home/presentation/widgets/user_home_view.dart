@@ -1,15 +1,16 @@
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cliniq/core/constants/locale_keys.dart';
 import 'package:cliniq/core/utils/app_svgs.dart';
 import 'package:cliniq/core/utils/app_text_styles.dart';
 import 'package:cliniq/core/utils/app_theme_extension.dart';
 import 'package:cliniq/core/widgets/custom_text_form_field.dart';
+import 'package:cliniq/core/widgets/user_profile_image.dart';
 import 'package:cliniq/core/widgets/vertical_gap.dart';
-import 'package:cliniq/features/home/presentation/providers/bottom_nav_index_provider.dart';
 import 'package:cliniq/features/home/presentation/providers/get_home_data_provider.dart';
 import 'package:cliniq/features/home/presentation/widgets/home_appointments_widget.dart';
 import 'package:cliniq/features/home/presentation/widgets/home_doctors_widget.dart';
 import 'package:cliniq/features/home/presentation/widgets/home_news_widget.dart';
 import 'package:cliniq/features/home/presentation/widgets/home_specializations_widget.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -37,7 +38,7 @@ class UserHomeView extends ConsumerWidget {
                   ListTile(
                     leading: const UserProfileImage(),
                     title: Text(
-                      'Welcome back',
+                      LocaleKeys.homeWelcomeBack.tr(),
                       style: AppTextStyles.getTextStyle(20).copyWith(
                         fontWeight: FontWeight.w700,
                         color: context.colorScheme.onPrimary,
@@ -61,7 +62,7 @@ class UserHomeView extends ConsumerWidget {
                       Icons.search,
                       color: context.inputTheme.iconColor,
                     ),
-                    hintText: 'Search Doctors and Speciality',
+                    hintText: LocaleKeys.homeSearchHint.tr(),
                     hintStyle: AppTextStyles.getTextStyle(
                       14,
                     ).copyWith(color: context.inputTheme.hintColor),
@@ -97,66 +98,6 @@ class UserHomeView extends ConsumerWidget {
             error: (error, stack) => Center(child: Text(error.toString())),
             loading: () => const Center(child: CircularProgressIndicator()),
           ),
-    );
-  }
-}
-
-class UserProfileImage extends ConsumerWidget {
-  const UserProfileImage({
-    super.key,
-    this.circleAvatarRadius = 30,
-    this.profilePicUrl,
-    this.isEnabled = true,
-    this.isCurrentUser = false,
-  });
-
-  final double circleAvatarRadius;
-  final String? profilePicUrl;
-  final bool isEnabled;
-  final bool isCurrentUser;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return GestureDetector(
-      onTap: !isEnabled
-          ? null
-          : () {
-              ref.read(bottomNavIndexProvider.notifier).setIndex(4);
-            },
-      child: CircleAvatar(
-        radius: circleAvatarRadius,
-        backgroundColor: context.colorScheme.onPrimary,
-        child: ClipOval(
-          child: profilePicUrl != null
-              ? CachedNetworkImage(
-                  imageUrl: profilePicUrl!,
-                  fit: BoxFit.cover,
-                  width: circleAvatarRadius * 2,
-                  height: circleAvatarRadius * 2,
-                  errorWidget: (context, error, stackTrace) {
-                    return CustomPersonIcon(
-                      circleAvatarRadius: circleAvatarRadius,
-                    );
-                  },
-                )
-              : CustomPersonIcon(circleAvatarRadius: circleAvatarRadius),
-        ),
-      ),
-    );
-  }
-}
-
-class CustomPersonIcon extends StatelessWidget {
-  const CustomPersonIcon({super.key, required this.circleAvatarRadius});
-
-  final double circleAvatarRadius;
-
-  @override
-  Widget build(BuildContext context) {
-    return Icon(
-      Icons.person_2,
-      color: Theme.of(context).colorScheme.secondary,
-      size: circleAvatarRadius * 1.5,
     );
   }
 }

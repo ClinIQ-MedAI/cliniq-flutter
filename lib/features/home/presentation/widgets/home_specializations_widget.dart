@@ -1,8 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cliniq/core/constants/locale_keys.dart';
 import 'package:cliniq/core/utils/app_text_styles.dart';
 import 'package:cliniq/core/utils/app_theme_extension.dart';
+import 'package:cliniq/core/widgets/horizontal_gap.dart';
 import 'package:cliniq/core/widgets/vertical_gap.dart';
 import 'package:cliniq/features/home/domain/entities/specialization_entity.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -22,7 +25,7 @@ class HomeSpecializationsWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Specializations',
+                LocaleKeys.homeSpecialization.tr(),
                 style: AppTextStyles.getTextStyle(16).copyWith(
                   fontWeight: FontWeight.w700,
                   color: context.textPalette.primaryColor,
@@ -31,7 +34,7 @@ class HomeSpecializationsWidget extends StatelessWidget {
               TextButton(
                 onPressed: () {},
                 child: Text(
-                  'View All',
+                  LocaleKeys.homeSeeAll.tr(),
                   style: AppTextStyles.getTextStyle(12).copyWith(
                     fontWeight: FontWeight.w400,
                     color: context.colorScheme.secondary,
@@ -79,7 +82,7 @@ class HomeSpecializationsWidget extends StatelessWidget {
                   ),
                   const VerticalGap(8),
                   Text(
-                    specialization.name,
+                    specialization.name.tr(),
                     style: AppTextStyles.getTextStyle(12).copyWith(
                       fontWeight: FontWeight.w500,
                       color: context.textPalette.primaryColor,
@@ -90,7 +93,7 @@ class HomeSpecializationsWidget extends StatelessWidget {
                 ],
               );
             },
-            separatorBuilder: (context, index) => SizedBox(width: 16.w),
+            separatorBuilder: (context, index) => const HorizontalGap(16),
             itemCount: specializations.length,
           ),
         ),

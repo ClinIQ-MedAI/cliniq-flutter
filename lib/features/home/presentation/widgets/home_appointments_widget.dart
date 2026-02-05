@@ -1,7 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cliniq/core/constants/locale_keys.dart';
 import 'package:cliniq/core/utils/app_text_styles.dart';
 import 'package:cliniq/core/utils/app_theme_extension.dart';
+import 'package:cliniq/core/widgets/horizontal_gap.dart';
+import 'package:cliniq/core/widgets/vertical_gap.dart';
 import 'package:cliniq/features/home/domain/entities/examination_appointment_entity.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -23,7 +27,7 @@ class HomeAppointmentsWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Upcoming Schedule',
+                LocaleKeys.homeExaminationAppointments.tr(),
                 style: AppTextStyles.getTextStyle(18).copyWith(
                   fontWeight: FontWeight.w700,
                   color: context.textPalette.primaryColor,
@@ -44,7 +48,7 @@ class HomeAppointmentsWidget extends StatelessWidget {
             ],
           ),
         ),
-        SizedBox(height: 16.h),
+        const VerticalGap(16),
         SizedBox(
           height: 140.h,
           child: PageView.builder(
@@ -112,43 +116,46 @@ class HomeAppointmentsWidget extends StatelessWidget {
                             appointment.doctorName,
                             style: AppTextStyles.getTextStyle(16).copyWith(
                               fontWeight: FontWeight.w700,
-                              color: Colors.white,
+                              color: context.colorScheme.onPrimary,
                             ),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
-                          SizedBox(height: 4.h),
+                          const VerticalGap(4),
                           Text(
                             appointment.doctorSpeciality,
                             style: AppTextStyles.getTextStyle(13).copyWith(
-                              color: Colors.white.withValues(alpha: 0.9),
+                              color: context.colorScheme.onPrimary.withValues(
+                                alpha: 0.9,
+                              ),
                               fontWeight: FontWeight.w500,
                             ),
                           ),
-                          SizedBox(height: 12.h),
+                          const VerticalGap(12),
                           Container(
                             padding: const EdgeInsets.symmetric(
                               horizontal: 10,
                               vertical: 6,
                             ),
                             decoration: BoxDecoration(
-                              color: Colors.black.withValues(alpha: 0.15),
-                              borderRadius: BorderRadius.circular(12),
+                              color: context.textPalette.primaryColor
+                                  .withValues(alpha: 0.15),
+                              borderRadius: BorderRadius.circular(12.r),
                             ),
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                const Icon(
+                                Icon(
                                   Icons.access_time_rounded,
-                                  color: Colors.white,
+                                  color: context.colorScheme.onPrimary,
                                   size: 14,
                                 ),
-                                SizedBox(width: 6.w),
+                                const HorizontalGap(6),
                                 Text(
                                   '${appointment.appointmentDate} • ${appointment.appointmentTime}',
                                   style: AppTextStyles.getTextStyle(12)
                                       .copyWith(
-                                        color: Colors.white,
+                                        color: context.colorScheme.onPrimary,
                                         fontWeight: FontWeight.w600,
                                       ),
                                 ),

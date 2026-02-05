@@ -3,8 +3,8 @@ import 'package:cliniq/core/utils/app_text_styles.dart';
 import 'package:cliniq/core/utils/app_theme_extension.dart';
 import 'package:cliniq/core/widgets/custom_button.dart';
 import 'package:cliniq/core/widgets/custom_text_form_field.dart';
+import 'package:cliniq/core/widgets/user_profile_image.dart';
 import 'package:cliniq/core/widgets/vertical_gap.dart';
-import 'package:cliniq/features/home/presentation/widgets/user_home_view.dart';
 import 'package:cliniq/features/user/data/models/user_profile_model.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +17,6 @@ class EditProfileScreen extends StatefulWidget {
 }
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
-  // Mock data initialization
   final UserProfileModel user = UserProfileModel.mock();
   late TextEditingController _nameController;
   late TextEditingController _emailController;
@@ -54,9 +53,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       appBar: AppBar(
         title: Text(
           LocaleKeys.profileUserEditProfile.tr(),
-          style: AppTextStyles.getTextStyle(20, fontFamily: 'Poppins').copyWith(
+          style: AppTextStyles.getTextStyle(20).copyWith(
             fontWeight: FontWeight.w700,
-            color: context.colorScheme.onBackground,
+            color: context.textPalette.primaryColor,
           ),
         ),
         centerTitle: true,
@@ -65,10 +64,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
-            const UserProfileImage(
-              circleAvatarRadius: 50,
-              isEnabled: true, // Allow changing photo
-            ),
+            UserProfileImage(circleAvatarRadius: 50, isEnabled: true),
             const VerticalGap(30),
             CustomTextFormField(
               controller: _nameController,
@@ -118,7 +114,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             CustomButton(
               text: LocaleKeys.profileUserSave.tr(),
               onPressed: () {
-                // Save logic
                 Navigator.pop(context);
               },
             ),

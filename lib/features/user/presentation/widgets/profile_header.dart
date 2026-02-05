@@ -1,8 +1,8 @@
 import 'package:cliniq/core/utils/app_text_styles.dart';
 import 'package:cliniq/core/utils/app_theme_extension.dart';
 import 'package:cliniq/core/widgets/horizontal_gap.dart';
+import 'package:cliniq/core/widgets/user_profile_image.dart';
 import 'package:cliniq/core/widgets/vertical_gap.dart';
-import 'package:cliniq/features/home/presentation/widgets/user_home_view.dart';
 import 'package:flutter/material.dart';
 
 class ProfileHeader extends StatelessWidget {
