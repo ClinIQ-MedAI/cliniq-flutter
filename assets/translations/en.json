@@ -117,7 +117,7 @@
         "verify_otp": "Verify OTP"
     },
     "complete_profile": {
-        "title": "Complete Your Profile",
+        "title": "Survey",
         "skip": "Skip",
         "submit": "Save & Continue",
         "height": "Height",
@@ -136,7 +136,16 @@
         "emergency_contact_name": "Contact Name",
         "emergency_contact_name_hint": "Enter emergency contact name",
         "emergency_contact_phone": "Contact Phone",
-        "emergency_contact_phone_hint": "Enter emergency contact phone number"
+        "emergency_contact_phone_hint": "Enter emergency contact phone number",
+        "setup_title": "Complete your setup",
+        "setup_description": "Help us provide you with the best medical care by completing your profile information.",
+        "general_info": "General Information",
+        "general_info_desc": "Basic physical details to help us calculate your health metrics.",
+        "health_status": "Health Status",
+        "health_status_desc": "Let us know about your current health conditions.",
+        "medical_history": "Medical History",
+        "medical_history_desc": "Information about allergies and chronic conditions.",
+        "emergency_contact_desc": "Who should we contact in case of an emergency?"
     },
     "home": {
         "welcome_back": "Welcome back",

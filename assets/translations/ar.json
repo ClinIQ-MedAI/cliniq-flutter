@@ -110,7 +110,7 @@
         }
     },
     "complete_profile": {
-        "title": "أكمل ملفك الشخصي",
+        "title": "استبيان",
         "skip": "تخطي",
         "submit": "حفظ ومتابعة",
         "height": "الطول",
@@ -129,7 +129,16 @@
         "emergency_contact_name": "اسم الشخص",
         "emergency_contact_name_hint": "أدخل اسم جهة الاتصال للطوارئ",
         "emergency_contact_phone": "رقم الهاتف",
-        "emergency_contact_phone_hint": "أدخل رقم هاتف جهة الاتصال للطوارئ"
+        "emergency_contact_phone_hint": "أدخل رقم هاتف جهة الاتصال للطوارئ",
+        "setup_title": "أكمل إعداد حسابك",
+        "setup_description": "ساعدنا في تقديم أفضل رعاية طبية لك من خلال إكمال معلومات ملفك الشخصي.",
+        "general_info": "معلومات عامة",
+        "general_info_desc": "تفاصيل بدنية أساسية لمساعدتنا في حساب مقاييسك الصحية.",
+        "health_status": "الحالة الصحية",
+        "health_status_desc": "أخبرنا عن حالتك الصحية الحالية.",
+        "medical_history": "التاريخ الطبي",
+        "medical_history_desc": "معلومات حول الحساسية والحالات المزمنة.",
+        "emergency_contact_desc": "من يجب أن نتصل به في حالة الطوارئ؟"
     },
     "verify_email": {
         "enter_code": "أدخل رمز التحقق المكون من 6 أرقام",

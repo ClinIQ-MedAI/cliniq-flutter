@@ -159,6 +159,22 @@ abstract class LocaleKeys {
   static const completeProfileEmergencyContactPhoneHint =
       "complete_profile.emergency_contact_phone_hint";
 
+  static const completeProfileSetupTitle = "complete_profile.setup_title";
+  static const completeProfileSetupDescription =
+      "complete_profile.setup_description";
+  static const completeProfileGeneralInfo = "complete_profile.general_info";
+  static const completeProfileGeneralInfoDesc =
+      "complete_profile.general_info_desc";
+  static const completeProfileHealthStatus = "complete_profile.health_status";
+  static const completeProfileHealthStatusDesc =
+      "complete_profile.health_status_desc";
+  static const completeProfileMedicalHistory =
+      "complete_profile.medical_history";
+  static const completeProfileMedicalHistoryDesc =
+      "complete_profile.medical_history_desc";
+  static const completeProfileEmergencyContactDesc =
+      "complete_profile.emergency_contact_desc";
+
   // forget_password
   static const forgetPasswordForgetPassword = "forget_password.forget_password";
   static const forgetPasswordEmail = "forget_password.email";

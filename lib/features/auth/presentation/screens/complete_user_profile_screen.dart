@@ -11,6 +11,7 @@ import 'package:cliniq/features/auth/presentation/widgets/complete_user_profile_
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CompleteUserProfileScreen extends ConsumerWidget {
   const CompleteUserProfileScreen({super.key});
@@ -29,25 +30,52 @@ class CompleteUserProfileScreen extends ConsumerWidget {
       inAsyncCall: ref.watch(completeProfileProvider).isLoading,
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: context.theme.primaryColor,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  context.theme.primaryColor,
+                  context.colorScheme.primaryContainer,
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+              borderRadius: const BorderRadius.only(
+                bottomLeft: Radius.circular(30),
+                bottomRight: Radius.circular(30),
+              ),
+            ),
+          ),
           centerTitle: true,
+          toolbarHeight: 80.h,
           title: Text(
             LocaleKeys.completeProfileTitle.tr(),
-            style: AppTextStyles.getTextStyle(20).copyWith(
-              fontWeight: FontWeight.w600,
-              color: context.colorScheme.onPrimary,
+            style: AppTextStyles.getTextStyle(22).copyWith(
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+              letterSpacing: 0.5,
             ),
           ),
           actions: [
-            TextButton(
-              onPressed: () {
-                navigateToHomeScreen(context);
-              },
-              child: Text(
-                LocaleKeys.completeProfileSkip.tr(),
-                style: AppTextStyles.getTextStyle(16).copyWith(
-                  fontWeight: FontWeight.w600,
-                  color: context.colorScheme.onPrimary,
+            Padding(
+              padding: EdgeInsets.only(right: 16.w),
+              child: TextButton(
+                onPressed: () {
+                  navigateToHomeScreen(context);
+                },
+                style: TextButton.styleFrom(
+                  backgroundColor: Colors.white.withValues(alpha: 0.2),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+                child: Text(
+                  LocaleKeys.completeProfileSkip.tr(),
+                  style: AppTextStyles.getTextStyle(
+                    14,
+                  ).copyWith(fontWeight: FontWeight.w600, color: Colors.white),
                 ),
               ),
             ),

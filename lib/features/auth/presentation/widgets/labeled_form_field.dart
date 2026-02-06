@@ -33,7 +33,7 @@ class LabeledFormField extends StatelessWidget {
       children: [
         Text(
           label.tr(),
-          style: AppTextStyles.getTextStyle(16).copyWith(
+          style: AppTextStyles.getTextStyle(17).copyWith(
             fontWeight: FontWeight.w600,
             color: context.textPalette.primaryColor,
           ),
