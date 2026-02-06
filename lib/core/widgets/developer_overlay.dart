@@ -15,7 +15,7 @@ class DeveloperOverlay extends StatelessWidget {
       children: [
         child,
         Positioned(
-          bottom: 80,
+          bottom: 120,
           right: 16,
           child: FloatingActionButton(
             mini: true,
@@ -31,7 +31,7 @@ class DeveloperOverlay extends StatelessWidget {
           ),
         ),
         Positioned(
-          bottom: 80,
+          bottom: 120,
           left: 24,
           child: FloatingActionButton(
             mini: true,

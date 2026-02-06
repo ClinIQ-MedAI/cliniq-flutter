@@ -35,7 +35,6 @@ class UserHomeView extends ConsumerWidget {
                     return result.fold(
                       (failure) => Center(child: Text(failure.message)),
                       (homeData) {
-                        // Ensure rebuilds on theme change
                         Theme.of(context);
                         return SingleChildScrollView(
                           child: Padding(

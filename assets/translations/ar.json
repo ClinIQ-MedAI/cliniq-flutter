@@ -148,6 +148,7 @@
         "verify_otp": "التحقق من الرمز"
     },
     "home": {
+        "title": "الرئيسية",
         "welcome_back": "مرحباً بعودتك",
         "search_hint": "ابحث عن الأطباء والتخصصات",
         "examination_appointments": "مواعيد الكشف",

@@ -11,8 +11,6 @@ import 'package:cliniq/features/auth/presentation/providers/complete_profile_pro
 import 'package:cliniq/core/widgets/form_section_header.dart';
 import 'package:cliniq/core/widgets/labeled_dropdown_form_field.dart';
 import 'package:cliniq/core/widgets/labeled_form_field.dart';
-import 'package:cliniq/core/utils/app_text_styles.dart';
-import 'package:cliniq/core/utils/app_theme_extension.dart';
 import 'package:cliniq/core/widgets/custom_card_section.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -68,133 +66,123 @@ class _CompleteProfileBodyState extends ConsumerState<CompleteProfileBody> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 32.h),
-      child: Form(
-        key: formKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              LocaleKeys.completeProfileSetupTitle.tr(),
-              style: AppTextStyles.getTextStyle(24).copyWith(
-                fontWeight: FontWeight.bold,
-                color: context.textPalette.primaryColor,
+      physics: const BouncingScrollPhysics(),
+      padding: EdgeInsets.symmetric(horizontal: 0.w, vertical: 0.h),
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 24.h),
+        child: Form(
+          key: formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const VerticalGap(8),
+
+              FormSectionHeader(
+                title: LocaleKeys.completeProfileGeneralInfo,
+                description: LocaleKeys.completeProfileGeneralInfoDesc,
+                icon: Icons.person_outline_rounded,
               ),
-            ),
-            const VerticalGap(8),
-            Text(
-              LocaleKeys.completeProfileSetupDescription.tr(),
-              style: AppTextStyles.getTextStyle(
-                15,
-              ).copyWith(color: context.textPalette.secondaryColor),
-            ),
-            const VerticalGap(32),
+              CustomCardSection(
+                children: [
+                  LabeledFormField(
+                    controller: heightController,
+                    label: LocaleKeys.completeProfileHeight,
+                    hint: LocaleKeys.completeProfileHeightHint,
+                    keyboardType: TextInputType.number,
+                  ),
+                  const VerticalGap(16),
+                  LabeledFormField(
+                    controller: weightController,
+                    label: LocaleKeys.completeProfileWeight,
+                    hint: LocaleKeys.completeProfileWeightHint,
+                    keyboardType: TextInputType.number,
+                  ),
+                  const VerticalGap(16),
+                  LabeledDropdownFormField(
+                    title: LocaleKeys.completeProfileBloodType,
+                    hintText: LocaleKeys.completeProfileBloodTypeHint,
+                    items: DropdownOptions.bloodTypes,
+                    onChanged: (v) => bloodType = v,
+                  ),
+                ],
+              ),
 
-            FormSectionHeader(
-              title: LocaleKeys.completeProfileGeneralInfo,
-              description: LocaleKeys.completeProfileGeneralInfoDesc,
-              icon: Icons.person_outline_rounded,
-            ),
-            CustomCardSection(
-              children: [
-                LabeledFormField(
-                  controller: heightController,
-                  label: LocaleKeys.completeProfileHeight,
-                  hint: LocaleKeys.completeProfileHeightHint,
-                  keyboardType: TextInputType.number,
-                ),
-                const VerticalGap(16),
-                LabeledFormField(
-                  controller: weightController,
-                  label: LocaleKeys.completeProfileWeight,
-                  hint: LocaleKeys.completeProfileWeightHint,
-                  keyboardType: TextInputType.number,
-                ),
-                const VerticalGap(16),
-                LabeledDropdownFormField(
-                  title: LocaleKeys.completeProfileBloodType,
-                  hintText: LocaleKeys.completeProfileBloodTypeHint,
-                  items: DropdownOptions.bloodTypes,
-                  onChanged: (v) => bloodType = v,
-                ),
-              ],
-            ),
+              const VerticalGap(16),
+              FormSectionHeader(
+                title: LocaleKeys.completeProfileMedicalHistory,
+                description: LocaleKeys.completeProfileMedicalHistoryDesc,
+                icon: Icons.history_edu_rounded,
+              ),
+              CustomCardSection(
+                children: [
+                  LabeledFormField(
+                    controller: allergiesController,
+                    label: LocaleKeys.completeProfileAllergies,
+                    hint: LocaleKeys.completeProfileAllergiesHint,
+                  ),
+                  const VerticalGap(16),
+                  LabeledFormField(
+                    controller: chronicController,
+                    label: LocaleKeys.completeProfileChronicConditions,
+                    hint: LocaleKeys.completeProfileChronicConditionsHint,
+                  ),
+                ],
+              ),
 
-            const VerticalGap(16),
-            FormSectionHeader(
-              title: LocaleKeys.completeProfileMedicalHistory,
-              description: LocaleKeys.completeProfileMedicalHistoryDesc,
-              icon: Icons.history_edu_rounded,
-            ),
-            CustomCardSection(
-              children: [
-                LabeledFormField(
-                  controller: allergiesController,
-                  label: LocaleKeys.completeProfileAllergies,
-                  hint: LocaleKeys.completeProfileAllergiesHint,
-                ),
-                const VerticalGap(16),
-                LabeledFormField(
-                  controller: chronicController,
-                  label: LocaleKeys.completeProfileChronicConditions,
-                  hint: LocaleKeys.completeProfileChronicConditionsHint,
-                ),
-              ],
-            ),
+              const VerticalGap(16),
+              FormSectionHeader(
+                title: LocaleKeys.completeProfileEmergencyContact,
+                description: LocaleKeys.completeProfileEmergencyContactDesc,
+                icon: Icons.emergency_outlined,
+              ),
+              CustomCardSection(
+                children: [
+                  LabeledFormField(
+                    controller: emergencyNameController,
+                    label: LocaleKeys.completeProfileEmergencyContactName,
+                    hint: LocaleKeys.completeProfileEmergencyContactNameHint,
+                  ),
+                  const VerticalGap(16),
+                  LabeledFormField(
+                    controller: emergencyPhoneController,
+                    label: LocaleKeys.completeProfileEmergencyContactPhone,
+                    hint: LocaleKeys.completeProfileEmergencyContactPhoneHint,
+                    keyboardType: TextInputType.phone,
+                  ),
+                ],
+              ),
 
-            const VerticalGap(16),
-            FormSectionHeader(
-              title: LocaleKeys.completeProfileEmergencyContact,
-              description: LocaleKeys.completeProfileEmergencyContactDesc,
-              icon: Icons.emergency_outlined,
-            ),
-            CustomCardSection(
-              children: [
-                LabeledFormField(
-                  controller: emergencyNameController,
-                  label: LocaleKeys.completeProfileEmergencyContactName,
-                  hint: LocaleKeys.completeProfileEmergencyContactNameHint,
-                ),
-                const VerticalGap(16),
-                LabeledFormField(
-                  controller: emergencyPhoneController,
-                  label: LocaleKeys.completeProfileEmergencyContactPhone,
-                  hint: LocaleKeys.completeProfileEmergencyContactPhoneHint,
-                  keyboardType: TextInputType.phone,
-                ),
-              ],
-            ),
+              const VerticalGap(16),
 
-            const VerticalGap(16),
+              FormSectionHeader(
+                title: LocaleKeys.completeProfileHealthStatus,
+                description: LocaleKeys.completeProfileHealthStatusDesc,
+                icon: Icons.favorite_border_rounded,
+              ),
+              CustomCardSection(
+                children: [
+                  CustomSwitchTile(
+                    title: LocaleKeys.completeProfileHasDiabetes.tr(),
+                    value: hasDiabetes,
+                    onChanged: (v) => setState(() => hasDiabetes = v),
+                  ),
+                  const CustomDivider(),
+                  CustomSwitchTile(
+                    title: LocaleKeys.completeProfileHasPressure.tr(),
+                    value: hasPressure,
+                    onChanged: (v) => setState(() => hasPressure = v),
+                  ),
+                ],
+              ),
 
-            FormSectionHeader(
-              title: LocaleKeys.completeProfileHealthStatus,
-              description: LocaleKeys.completeProfileHealthStatusDesc,
-              icon: Icons.favorite_border_rounded,
-            ),
-            CustomCardSection(
-              children: [
-                CustomSwitchTile(
-                  title: LocaleKeys.completeProfileHasDiabetes.tr(),
-                  value: hasDiabetes,
-                  onChanged: (v) => setState(() => hasDiabetes = v),
-                ),
-                const CustomDivider(),
-                CustomSwitchTile(
-                  title: LocaleKeys.completeProfileHasPressure.tr(),
-                  value: hasPressure,
-                  onChanged: (v) => setState(() => hasPressure = v),
-                ),
-              ],
-            ),
+              const VerticalGap(32),
 
-            const VerticalGap(32),
-
-            CustomButton(
-              onPressed: onSubmit,
-              text: LocaleKeys.completeProfileSubmit,
-            ),
-          ],
+              CustomButton(
+                onPressed: onSubmit,
+                text: LocaleKeys.completeProfileSubmit,
+              ),
+            ],
+          ),
         ),
       ),
     );

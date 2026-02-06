@@ -148,6 +148,7 @@
         "emergency_contact_desc": "Who should we contact in case of an emergency?"
     },
     "home": {
+        "title": "Home",
         "welcome_back": "Welcome back",
         "search_hint": "Search Doctors and Speciality",
         "examination_appointments": "Examination appointments",

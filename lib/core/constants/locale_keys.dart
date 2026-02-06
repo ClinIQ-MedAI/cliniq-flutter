@@ -196,6 +196,7 @@ abstract class LocaleKeys {
   static const resetPasswordReset = "reset_password.reset";
 
   // home
+  static const homeTitle = "home.title";
   static const homeWelcomeBack = "home.welcome_back";
   static const homeSearchHint = "home.search_hint";
   static const homeExaminationAppointments = "home.examination_appointments";
