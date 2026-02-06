@@ -84,6 +84,8 @@ abstract class LocaleKeys {
   static const bottomNavigationBarAiChat = "bottom_navigation_bar.ai_chat";
 
   // auth_login
+  static const authLoginTitle = "auth_login.title";
+  static const authLoginDescription = "auth_login.description";
   static const authLoginEmailHint = "auth_login.email_hint";
   static const authLoginPasswordHint = "auth_login.password_hint";
   static const authLoginForgotPassword = "auth_login.forgot_password";
@@ -92,6 +94,8 @@ abstract class LocaleKeys {
   static const authLoginDontHaveAnAccount = "auth_login.dont_have_an_account";
 
   // signup/user
+  static const signupTitle = "signup.title";
+  static const signupDescription = "signup.description";
   static const signupUserName = "signup.user.name";
   static const signupUserNameHint = "signup.user.name_hint";
   static const signupUserEmail = "signup.user.email";
@@ -116,6 +120,8 @@ abstract class LocaleKeys {
   static const signupUserLoginButton = "signup.user.login_button";
 
   // verify_email
+  static const verifyEmailTitle = "verify_email.title";
+  static const verifyEmailDescription = "verify_email.description";
   static const verifyEmailEnterCode = "verify_email.enter_code";
   static const verifyEmailCodeSent = "verify_email.code_sent";
   static const verifyEmailResendCode = "verify_email.resend_code";
@@ -176,12 +182,16 @@ abstract class LocaleKeys {
       "complete_profile.emergency_contact_desc";
 
   // forget_password
+  static const forgetPasswordTitle = "forget_password.title";
+  static const forgetPasswordDescription = "forget_password.description";
   static const forgetPasswordForgetPassword = "forget_password.forget_password";
   static const forgetPasswordEmail = "forget_password.email";
   static const forgetPasswordEmailHint = "forget_password.email_hint";
   static const forgetPasswordSendOtp = "forget_password.send_otp";
 
   // verify_otp
+  static const verifyOtpTitle = "verify_otp.title";
+  static const verifyOtpDescription = "verify_otp.description";
   static const verifyOtpEnterCode = "verify_otp.enter_code";
   static const verifyOtpCodeSent = "verify_otp.code_sent";
   static const verifyOtpResendCode = "verify_otp.resend_code";
@@ -189,6 +199,8 @@ abstract class LocaleKeys {
   static const verifyOtpVerifyOtp = "verify_otp.verify_otp";
 
   // reset_password
+  static const resetPasswordTitle = "reset_password.title";
+  static const resetPasswordDescription = "reset_password.description";
   static const resetPasswordSetNewPassword = "reset_password.set_new_password";
   static const resetPasswordPasswordHint = "reset_password.password_hint";
   static const resetPasswordConfirmPasswordHint =

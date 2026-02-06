@@ -12,7 +12,7 @@ Widget getInitialRoute() {
   final bool isOnboardingCompleted =
       AppStorageHelper.getBool(StorageKeys.isOnboardingCompleted) ?? false;
 
-  // return LoginScreen();
+  return LoginScreen();
   return const CompleteUserProfileScreen();
   if (!isOnboardingCompleted) {
     return const OnboardingScreen();

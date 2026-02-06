@@ -80,9 +80,14 @@ class AppTheme {
     ),
 
     // SnackBar Theme
-    snackBarTheme: const SnackBarThemeData(
+    snackBarTheme: SnackBarThemeData(
       backgroundColor: AppLightColors.primary,
-      contentTextStyle: TextStyle(color: Colors.white),
+      contentTextStyle: const TextStyle(
+        color: Colors.white,
+        fontWeight: FontWeight.w500,
+      ),
+      behavior: SnackBarBehavior.floating,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
     ),
 
     visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -162,9 +167,14 @@ class AppTheme {
     ),
 
     // SnackBar Theme
-    snackBarTheme: const SnackBarThemeData(
+    snackBarTheme: SnackBarThemeData(
       backgroundColor: AppDarkColors.primary,
-      contentTextStyle: TextStyle(color: Colors.white),
+      contentTextStyle: const TextStyle(
+        color: Colors.white,
+        fontWeight: FontWeight.w500,
+      ),
+      behavior: SnackBarBehavior.floating,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
     ),
 
     visualDensity: VisualDensity.adaptivePlatformDensity,

@@ -9,13 +9,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class FormSectionHeader extends StatelessWidget {
   final String title;
   final String? description;
-  final IconData icon;
+  final IconData? icon;
 
   const FormSectionHeader({
     super.key,
     required this.title,
     this.description,
-    required this.icon,
+    this.icon,
   });
 
   @override
@@ -27,21 +27,23 @@ class FormSectionHeader extends StatelessWidget {
         children: [
           Row(
             children: [
-              Container(
-                padding: EdgeInsets.all(8.w),
-                decoration: BoxDecoration(
-                  color: context.colorScheme.primaryContainer.withValues(
-                    alpha: 0.1,
+              if (icon != null) ...[
+                Container(
+                  padding: EdgeInsets.all(8.w),
+                  decoration: BoxDecoration(
+                    color: context.colorScheme.primaryContainer.withValues(
+                      alpha: 0.1,
+                    ),
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                  borderRadius: BorderRadius.circular(10),
+                  child: Icon(
+                    icon,
+                    color: context.colorScheme.primaryContainer,
+                    size: 22.sp,
+                  ),
                 ),
-                child: Icon(
-                  icon,
-                  color: context.colorScheme.primaryContainer,
-                  size: 22.sp,
-                ),
-              ),
-              const HorizontalGap(12),
+                const HorizontalGap(12),
+              ],
               Expanded(
                 child: Text(
                   title.tr(),

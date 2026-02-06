@@ -59,6 +59,8 @@
         "description_3": "Early and accurate detection of neurological disorders with advanced Diffusion MRI"
     },
     "auth_login": {
+        "title": "Welcome Back",
+        "description": "Please log in to your account to continue your medical journey.",
         "email_hint": "Email",
         "password_hint": "password",
         "forgot_password": "Forgot Password?",
@@ -68,12 +70,16 @@
         "dont_have_an_account": "Do not have an account?"
     },
     "forget_password": {
+        "title": "Forgot Password",
+        "description": "No worries! Enter your registered email to receive an OTP code.",
         "forget_password": "Forgot Password",
         "email": "Email ID",
         "email_hint": "Enter Email ID",
         "send_otp": "Send OTP"
     },
     "verify_otp": {
+        "title": "Verification",
+        "description": "Enter the 6-digit code we sent to your email address.",
         "enter_code": "Enter the 6-digit verification code",
         "code_sent": "We have sent a verification code to your email",
         "resend_code": "Resend code",
@@ -81,12 +87,16 @@
         "verify_otp": "Verify OTP"
     },
     "reset_password": {
+        "title": "Reset Password",
+        "description": "Create a strong new password to protect your account.",
         "set_new_password": "Set New Password",
         "password_hint": "Password",
         "confirm_password_hint": "Confirm Password",
         "reset": "Reset"
     },
     "signup": {
+        "title": "Create Account",
+        "description": "Join ClinIq today and start managing your health smarter.",
         "user": {
             "name": "Name",
             "name_hint": "Enter Name",
@@ -110,6 +120,8 @@
         }
     },
     "verify_email": {
+        "title": "Email Verification",
+        "description": "Please enter the 6-digit code sent to your email to verify your account.",
         "enter_code": "Enter the 6-digit verification code",
         "code_sent": "We have sent a verification code to your email",
         "resend_code": "Resend code",

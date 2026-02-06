@@ -12,8 +12,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BirthDatePickWidget extends StatefulWidget {
   final ValueChanged<DateTime> onDateSelected;
+  final IconData? icon;
 
-  const BirthDatePickWidget({super.key, required this.onDateSelected});
+  const BirthDatePickWidget({
+    super.key,
+    required this.onDateSelected,
+    this.icon,
+  });
 
   @override
   State<BirthDatePickWidget> createState() => _BirthDatePickWidgetState();
@@ -107,7 +112,7 @@ class _BirthDatePickWidgetState extends State<BirthDatePickWidget> {
           hintText: LocaleKeys.signupUserBirthDateHint,
           keyboardType: TextInputType.datetime,
           suffixIcon: Icon(
-            Icons.calendar_month,
+            widget.icon ?? Icons.calendar_month,
             color: context.colorScheme.onSurface,
             size: 24,
           ),

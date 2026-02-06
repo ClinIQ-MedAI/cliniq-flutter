@@ -1,18 +1,18 @@
-import 'package:cliniq/core/utils/app_images.dart';
 import 'package:cliniq/core/utils/app_theme_extension.dart';
+import 'package:cliniq/core/widgets/custom_card_section.dart';
 import 'package:cliniq/core/widgets/labeled_form_field.dart';
-import 'package:cliniq/features/auth/presentation/widgets/auth_page_layout.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:cliniq/features/auth/presentation/widgets/auth_header.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cliniq/core/constants/locale_keys.dart';
 import 'package:cliniq/core/helpers/show_custom_snack_bar.dart';
 import 'package:cliniq/core/utils/app_routes.dart';
-import 'package:cliniq/core/utils/app_text_styles.dart';
 import 'package:cliniq/core/utils/success.dart';
 import 'package:cliniq/core/utils/validators.dart';
 import 'package:cliniq/core/widgets/custom_button.dart';
 import 'package:cliniq/core/widgets/vertical_gap.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cliniq/features/auth/presentation/providers/forget_password_provider.dart';
 
 class ForgetPasswordBody extends ConsumerStatefulWidget {
@@ -80,37 +80,46 @@ class _ForgetPasswordBodyState extends ConsumerState<ForgetPasswordBody> {
   Widget build(BuildContext context) {
     listenOnForgetPasswordProvider();
 
-    return AuthPageLayout(
-      topSection: Image.asset(AppImages.forgetPasswordLogo),
-      bottomSection: Form(
-        key: formKey,
+    return Scaffold(
+      backgroundColor: context.theme.scaffoldBackgroundColor,
+      body: SafeArea(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const VerticalGap(35),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  LocaleKeys.forgetPasswordForgetPassword.tr(),
-                  style: AppTextStyles.getTextStyle(
-                    20,
-                  ).copyWith(color: context.textPalette.primaryColor),
+            AuthHeader(
+              icon: Icons.lock_reset_rounded,
+              title: LocaleKeys.forgetPasswordTitle,
+              description: LocaleKeys.forgetPasswordDescription,
+              onBack: () => Navigator.pop(context),
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 24.h),
+                child: Form(
+                  key: formKey,
+                  child: Column(
+                    children: [
+                      CustomCardSection(
+                        children: [
+                          LabeledFormField(
+                            label: LocaleKeys.forgetPasswordEmail,
+                            hint: LocaleKeys.forgetPasswordEmailHint,
+                            controller: emailController,
+                            validator: Validators.validateEmail,
+                            keyboardType: TextInputType.emailAddress,
+                          ),
+                        ],
+                      ).animate().fadeIn(delay: 500.ms).slideY(begin: 0.1),
+                      const VerticalGap(32),
+                      CustomButton(
+                        onPressed: onSendCodeTap,
+                        isDisabled: !isButtonEnabled,
+                        text: LocaleKeys.forgetPasswordSendOtp,
+                      ).animate().fadeIn(delay: 600.ms),
+                    ],
+                  ),
                 ),
-              ],
-            ),
-            const VerticalGap(43),
-            LabeledFormField(
-              label: LocaleKeys.forgetPasswordEmail,
-              hint: LocaleKeys.forgetPasswordEmailHint,
-              controller: emailController,
-              validator: Validators.validateEmail,
-            ),
-            const VerticalGap(50),
-            CustomButton(
-              onPressed: onSendCodeTap,
-              isDisabled: !isButtonEnabled,
-              text: LocaleKeys.forgetPasswordSendOtp,
+              ),
             ),
           ],
         ),

@@ -15,6 +15,7 @@ class CustomDropdownFormField extends StatelessWidget {
   final TextStyle? valueStyle;
   final String? Function(String?)? validator;
   final bool isLight;
+  final Widget? prefixIcon;
 
   const CustomDropdownFormField({
     super.key,
@@ -27,6 +28,7 @@ class CustomDropdownFormField extends StatelessWidget {
     this.valueStyle,
     this.validator,
     this.isLight = false,
+    this.prefixIcon,
   });
 
   @override
@@ -44,6 +46,7 @@ class CustomDropdownFormField extends StatelessWidget {
           12,
         ).copyWith(color: context.colorScheme.error),
         helperText: helperText,
+        prefixIcon: prefixIcon,
       ),
       hint: Text(
         hintText.tr(),

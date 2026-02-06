@@ -1,15 +1,16 @@
-import 'package:cliniq/core/utils/app_images.dart';
 import 'package:cliniq/core/utils/app_theme_extension.dart';
-import 'package:cliniq/features/auth/presentation/widgets/auth_page_layout.dart';
+import 'package:cliniq/core/widgets/custom_card_section.dart';
+import 'package:cliniq/features/auth/presentation/widgets/auth_header.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cliniq/core/constants/locale_keys.dart';
-import 'package:cliniq/core/utils/app_text_styles.dart';
 import 'package:cliniq/core/utils/validators.dart';
 import 'package:cliniq/core/widgets/custom_button.dart';
 import 'package:cliniq/core/widgets/custom_password_text_field.dart';
 import 'package:cliniq/core/widgets/vertical_gap.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cliniq/features/auth/presentation/providers/reset_password_provider.dart';
 
 class ResetPasswordBody extends ConsumerStatefulWidget {
@@ -65,43 +66,56 @@ class _ResetPasswordBodyState extends ConsumerState<ResetPasswordBody> {
 
   @override
   Widget build(BuildContext context) {
-    return AuthPageLayout(
-      topSection: Image.asset(AppImages.verifyEmailLogo),
-      bottomSection: Form(
-        key: formKey,
+    return Scaffold(
+      backgroundColor: context.theme.scaffoldBackgroundColor,
+      body: SafeArea(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const VerticalGap(45),
-            Text(
-              LocaleKeys.resetPasswordSetNewPassword.tr(),
-              style: AppTextStyles.getTextStyle(24).copyWith(
-                fontWeight: FontWeight.w700,
-                color: context.textPalette.primaryColor,
+            AuthHeader(
+              icon: Icons.shield_rounded,
+              title: LocaleKeys.resetPasswordTitle,
+              description: LocaleKeys.resetPasswordDescription,
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 24.h),
+                child: Form(
+                  key: formKey,
+                  child: Column(
+                    children: [
+                      CustomCardSection(
+                        children: [
+                          CustomPasswordTextField(
+                            validator: Validators.validatePassword,
+                            controller: passwordController,
+                            hintText: LocaleKeys.resetPasswordPasswordHint.tr(),
+                          ),
+                          const VerticalGap(16),
+                          CustomPasswordTextField(
+                            validator: (value) =>
+                                Validators.confirmPasswordValidator(
+                                  value,
+                                  passwordController.text,
+                                ),
+                            controller: confirmPasswordController,
+                            hintText: LocaleKeys
+                                .resetPasswordConfirmPasswordHint
+                                .tr(),
+                          ),
+                        ],
+                      ).animate().fadeIn(delay: 500.ms).slideY(begin: 0.1),
+                      const VerticalGap(32),
+                      CustomButton(
+                        onPressed: onSendCodeTap,
+                        isDisabled: !isButtonEnabled,
+                        text: LocaleKeys.resetPasswordReset.tr(),
+                      ).animate().fadeIn(delay: 600.ms),
+                    ],
+                  ),
+                ),
               ),
             ),
-            const VerticalGap(40),
-            CustomPasswordTextField(
-              validator: Validators.validatePassword,
-              controller: passwordController,
-              hintText: LocaleKeys.resetPasswordPasswordHint.tr(),
-            ),
-            const VerticalGap(16),
-            CustomPasswordTextField(
-              validator: (value) => Validators.confirmPasswordValidator(
-                value,
-                passwordController.text,
-              ),
-              controller: confirmPasswordController,
-              hintText: LocaleKeys.resetPasswordConfirmPasswordHint.tr(),
-            ),
-            const VerticalGap(32),
-            CustomButton(
-              onPressed: onSendCodeTap,
-              isDisabled: !isButtonEnabled,
-              text: LocaleKeys.resetPasswordReset.tr(),
-            ),
-            const VerticalGap(45),
           ],
         ),
       ),

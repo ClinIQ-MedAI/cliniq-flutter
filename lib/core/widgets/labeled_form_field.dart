@@ -17,6 +17,7 @@ class LabeledFormField extends StatelessWidget {
     this.keyboardType,
     this.isLight = false,
     this.maxLines = 1,
+    this.prefixIcon,
   });
 
   final TextEditingController? controller;
@@ -27,6 +28,7 @@ class LabeledFormField extends StatelessWidget {
   final TextInputType? keyboardType;
   final bool isLight;
   final int maxLines;
+  final Widget? prefixIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -57,6 +59,7 @@ class LabeledFormField extends StatelessWidget {
             keyboardType: keyboardType,
             isLight: isLight,
             maxLines: maxLines,
+            prefixIcon: prefixIcon,
           ),
       ],
     );
