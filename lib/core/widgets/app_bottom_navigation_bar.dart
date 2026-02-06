@@ -1,4 +1,4 @@
-import 'package:cliniq/core/constants/bottom_nav_items.dart';
+import 'package:cliniq/core/constants/dropdown_options.dart';
 import 'package:cliniq/core/utils/app_text_styles.dart';
 import 'package:cliniq/core/utils/app_theme_extension.dart';
 import 'package:curved_labeled_navigation_bar/curved_navigation_bar.dart';
@@ -38,7 +38,7 @@ class AppBottomNavigationBar extends StatelessWidget {
         buttonBackgroundColor: context.theme.scaffoldBackgroundColor,
         height: 85.h,
         index: selectedIndex,
-        items: bottomNavItems.map((item) {
+        items: DropdownOptions.bottomNavItems.map((item) {
           if (item.isCenter) {
             return CurvedNavigationBarItem(
               child: Column(

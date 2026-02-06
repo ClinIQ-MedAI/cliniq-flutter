@@ -1,3 +1,4 @@
+import 'package:cliniq/core/constants/dropdown_options.dart';
 import 'package:cliniq/core/constants/locale_keys.dart';
 import 'package:cliniq/core/utils/app_routes.dart';
 import 'package:cliniq/core/widgets/custom_button.dart';
@@ -115,16 +116,7 @@ class _CompleteProfileBodyState extends ConsumerState<CompleteProfileBody> {
                 LabeledDropdownFormField(
                   title: LocaleKeys.completeProfileBloodType,
                   hintText: LocaleKeys.completeProfileBloodTypeHint,
-                  items: const [
-                    'A+',
-                    'A-',
-                    'B+',
-                    'B-',
-                    'AB+',
-                    'AB-',
-                    'O+',
-                    'O-',
-                  ],
+                  items: DropdownOptions.bloodTypes,
                   onChanged: (v) => bloodType = v,
                   isLight: true,
                 ),
