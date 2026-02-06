@@ -7,7 +7,7 @@ import 'package:cliniq/core/utils/app_text_styles.dart';
 
 class AppTheme {
   /// ----------------- Light Theme -----------------
-  static ThemeData lightTheme = ThemeData(
+  static ThemeData get lightTheme => ThemeData(
     brightness: Brightness.light,
     useMaterial3: true,
 
@@ -88,7 +88,7 @@ class AppTheme {
   );
 
   /// ----------------- Dark Theme -----------------
-  static ThemeData darkTheme = ThemeData(
+  static ThemeData get darkTheme => ThemeData(
     brightness: Brightness.dark,
     useMaterial3: true,
 

@@ -64,7 +64,7 @@ class HomeSpecializationsWidget extends StatelessWidget {
                         padding: const EdgeInsets.all(18),
                         child: CachedNetworkImage(
                           imageUrl: specialization.image,
-                          fit: BoxFit.contain,
+                          fit: BoxFit.cover,
                           placeholder: (context, url) => const Center(
                             child: CircularProgressIndicator(strokeWidth: 2),
                           ),

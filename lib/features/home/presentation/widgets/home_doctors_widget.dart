@@ -76,6 +76,7 @@ class HomeDoctorsWidget extends StatelessWidget {
                             imageUrl: doctor.image,
                             fit: BoxFit.cover,
                             width: double.infinity,
+                            height: double.infinity,
                             alignment: Alignment.topCenter,
                             placeholder: (context, url) => const Center(
                               child: CircularProgressIndicator(strokeWidth: 2),
