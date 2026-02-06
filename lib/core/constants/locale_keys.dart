@@ -219,6 +219,16 @@ abstract class LocaleKeys {
   static const profileUserEditProfile = "profile.user.edit_profile";
   static const profileUserFullName = "profile.user.full_name";
   static const profileUserSave = "profile.user.save";
+  static const profileUserMedicalId = "profile.user.medical_id";
+  static const profileUserHealthStats = "profile.user.health_stats";
+  static const profileUserFitnessOverview = "profile.user.fitness_overview";
+  static const profileUserPersonalInfo = "profile.user.personal_info";
+  static const profileUserMedicalInfo = "profile.user.medical_info";
+  static const profileUserGender = "profile.user.gender";
+  static const profileUserAge = "profile.user.age";
+  static const profileUserYears = "profile.user.years";
+  static const profileUserCm = "profile.user.cm";
+  static const profileUserKg = "profile.user.kg";
 
   // settings
   static const settingsUserTitle = "settings.user.title";

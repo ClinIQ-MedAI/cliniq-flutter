@@ -171,7 +171,17 @@
             "ailments": "Ailments",
             "edit_profile": "Edit Profile",
             "full_name": "Full Name",
-            "save": "Save"
+            "save": "Save",
+            "medical_id": "Medical ID",
+            "health_stats": "Health Stats",
+            "fitness_overview": "Fitness Overview",
+            "personal_info": "Personal Information",
+            "medical_info": "Medical Information",
+            "gender": "Gender",
+            "age": "Age",
+            "years": "Years",
+            "cm": "cm",
+            "kg": "kg"
         }
     },
     "settings": {

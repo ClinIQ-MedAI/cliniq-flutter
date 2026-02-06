@@ -15,30 +15,76 @@ class ProfileHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        UserProfileImage(circleAvatarRadius: 65, isEnabled: false),
+        Stack(
+          alignment: Alignment.bottomRight,
+          children: [
+            Container(
+              padding: const EdgeInsets.all(4),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color: context.colorScheme.primary.withValues(alpha: 0.2),
+                  width: 3,
+                ),
+              ),
+              child: const UserProfileImage(circleAvatarRadius: 60),
+            ),
+            Container(
+              padding: const EdgeInsets.all(6),
+              decoration: BoxDecoration(
+                color: context.colorScheme.primary,
+                shape: BoxShape.circle,
+                border: Border.all(color: Colors.white, width: 2),
+              ),
+              child: const Icon(
+                Icons.verified_rounded,
+                color: Colors.white,
+                size: 18,
+              ),
+            ),
+          ],
+        ),
         const VerticalGap(20),
         Text(
           name,
-          style: AppTextStyles.getTextStyle(24).copyWith(
-            fontWeight: FontWeight.bold,
+          style: AppTextStyles.getTextStyle(26).copyWith(
+            fontWeight: FontWeight.w900,
             color: context.textPalette.primaryColor,
+            letterSpacing: -0.5,
           ),
         ),
-        const VerticalGap(5),
+        const VerticalGap(6),
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+          decoration: BoxDecoration(
+            color: context.colorScheme.secondary.withValues(alpha: 0.1),
+            borderRadius: BorderRadius.circular(100),
+          ),
+          child: Text(
+            '#CLINIQ-ID-9823',
+            style: AppTextStyles.getTextStyle(12).copyWith(
+              fontWeight: FontWeight.w800,
+              color: context.colorScheme.secondary,
+              letterSpacing: 1,
+            ),
+          ),
+        ),
+        const VerticalGap(12),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
-              Icons.email_outlined,
+              Icons.alternate_email_rounded,
               size: 16,
-              color: context.textPalette.primaryColor,
+              color: context.textPalette.secondaryColor,
             ),
             const HorizontalGap(8),
             Text(
               email,
-              style: AppTextStyles.getTextStyle(
-                14,
-              ).copyWith(color: context.textPalette.primaryColor),
+              style: AppTextStyles.getTextStyle(14).copyWith(
+                color: context.textPalette.secondaryColor,
+                fontWeight: FontWeight.w500,
+              ),
             ),
           ],
         ),

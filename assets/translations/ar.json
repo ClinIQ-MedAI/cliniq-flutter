@@ -171,7 +171,17 @@
             "ailments": "الأمراض",
             "edit_profile": "تعديل الملف الشخصي",
             "full_name": "الاسم الكامل",
-            "save": "حفظ"
+            "save": "حفظ",
+            "medical_id": "المعرف الطبي",
+            "health_stats": "الإحصائيات الصحية",
+            "fitness_overview": "نظرة عامة على اللياقة",
+            "personal_info": "المعلومات الشخصية",
+            "medical_info": "المعلومات الطبية",
+            "gender": "الجنس",
+            "age": "العمر",
+            "years": "سنوات",
+            "cm": "سم",
+            "kg": "كجم"
         }
     },
     "settings": {
